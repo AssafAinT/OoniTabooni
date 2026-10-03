@@ -90,6 +90,25 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .card{background:var(--card);border:1px solid var(--line);border-radius:24px}
 .muted{color:var(--muted)}
 .desc{color:var(--muted);font-size:.88rem;margin:8px 2px 0}
+.desc.warnline{color:var(--amber);font-weight:600}
+.sublbl{color:var(--muted);font-size:.85rem;font-weight:700;margin:18px 2px 8px}
+.presets{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 8px;margin:0 -2px;scrollbar-width:none}
+.presets::-webkit-scrollbar{display:none}
+.pr{flex:0 0 auto;min-width:122px;max-width:170px;scroll-snap-align:start;text-align:start;border:1.5px solid var(--line);background:var(--card);border-radius:18px;padding:10px 12px 11px;transition:transform .15s,border-color .25s}
+.pr:active{transform:scale(.97)}
+.pr .dots{display:flex;gap:4px;margin-bottom:6px}
+.pr .dots i{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.pr b{display:block;font-weight:800;font-size:.95rem}
+.pr small{display:block;color:var(--muted);font-size:.76rem;font-weight:600;margin-top:1px}
+.pr[aria-checked="true"]{border-color:transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--amber),var(--ember),var(--ember-deep)) border-box}
+.flours{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fl{display:flex;gap:10px;align-items:flex-start;text-align:start;border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:10px 11px;transition:transform .15s,border-color .25s,background .25s}
+.fl:active{transform:scale(.97)}
+.fl > i{flex:0 0 auto;width:16px;height:16px;border-radius:50%;margin-top:3px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.fl b{display:block;font-weight:800;font-size:.95rem;line-height:1.25}
+.fl small{display:block;color:var(--muted);font-size:.76rem;font-weight:600;line-height:1.35;margin-top:2px}
+.fl[aria-checked="true"]{border-color:var(--ember);background:color-mix(in srgb,var(--ember) 10%,var(--card))}
+#sharewrap .head{margin-top:16px}
 
 /* style cards */
 .stylecards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -348,12 +367,88 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
 .dockwrap{position:fixed;z-index:30;left:0;right:0;bottom:0;padding:0 12px calc(10px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;pointer-events:none}
 .toast{pointer-events:none;margin-bottom:10px;padding:10px 16px;border-radius:14px;background:var(--ink);color:var(--bg);font-weight:700;font-size:.92rem;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s}
 .toast.on{opacity:1;transform:none}
-.dock{pointer-events:auto;width:min(440px,100%);display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px;border-radius:26px;background:var(--glass);-webkit-backdrop-filter:saturate(1.6) blur(20px);backdrop-filter:saturate(1.6) blur(20px);border:1px solid var(--line-2);box-shadow:var(--shadow)}
-.dock button{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;border-radius:20px;padding:8px 0 6px;color:var(--muted);font-size:.78rem;font-weight:800;transition:color .25s,background .25s}
+.dock{pointer-events:auto;width:min(470px,100%);display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:6px;border-radius:26px;background:var(--glass);-webkit-backdrop-filter:saturate(1.6) blur(20px);backdrop-filter:saturate(1.6) blur(20px);border:1px solid var(--line-2);box-shadow:var(--shadow)}
+.dock button{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;border-radius:20px;padding:8px 0 6px;color:var(--muted);font-size:.74rem;font-weight:800;white-space:nowrap;transition:color .25s,background .25s}
 .dock svg{width:24px;height:24px}
 .dock button[aria-selected="true"]{color:var(--ink);background:var(--card-2)}
 .dock button[aria-selected="true"] svg{color:var(--ember)}
 .dock button.live::after{content:"";position:absolute;top:7px;left:calc(50% - 18px);width:8px;height:8px;border-radius:50%;background:var(--ember);animation:pulse 1.2s ease-in-out infinite}
+
+/* party */
+.addcard{padding:14px}
+.field{width:100%;height:52px;border-radius:16px;border:1.5px solid var(--line-2);background:var(--bg-elev);padding:0 14px;font-weight:600;font-size:1.05rem}
+.menu{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+.mi{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:6px 13px 6px 11px;font-weight:700;font-size:.92rem;min-height:40px;transition:transform .12s}
+.mi i{width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.mi[aria-checked="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mi:active{transform:scale(.96)}
+.addcard .btn{margin-top:12px;min-height:54px;font-size:1.05rem}
+.orders{list-style:none;margin:12px 0 0;padding:2px 14px}
+.orders li{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.orders li:last-child{border-bottom:0}
+.orders .no{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--card-2);font-size:1.05rem}
+.orders li.done .no{background:var(--basil);color:#fff}
+.orders li.cur .no{background:linear-gradient(135deg,var(--amber),var(--ember));color:var(--on-ember)}
+.orders li.done b{opacity:.6}
+.orders b{display:block;font-weight:800;line-height:1.25}
+.orders small{display:block;color:var(--muted);font-weight:600;font-size:.84rem}
+.x{flex:none;width:38px;height:38px;border-radius:12px;border:0;background:var(--card-2);color:var(--muted);display:grid;place-items:center}
+.x svg{width:16px;height:16px}
+.stats3.party{margin-top:12px}
+.shopcard{padding:2px 16px 4px}
+.shop{list-style:none;margin:0;padding:0}
+.shop li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.shop li:last-child{border-bottom:0}
+.shop li.grp{color:var(--muted);font-weight:800;font-size:.85rem;padding:16px 0 4px;border-bottom:0}
+.shop .nm b{font-weight:700}
+.shop .nm small{display:block;color:var(--muted);font-size:.82rem}
+.shop .amt{font-weight:800;white-space:nowrap}
+.btnrow{display:flex;gap:10px}
+.btnrow > *{flex:1}
+a.btn{text-decoration:none}
+.linkbtn{background:none;border:0;color:var(--ember);font-weight:700;padding:6px 0 2px;min-height:40px}
+.switch + .switch{margin-top:10px}
+/* queue on bake tab */
+.qcard{margin-top:12px;padding:12px 14px;border-radius:22px;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line)}
+.qcard .qn{flex:none;width:50px;height:50px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--amber),var(--ember) 50%,var(--ember-deep));color:var(--on-ember);font-size:1.4rem}
+.qcard .qn svg{width:24px;height:24px}
+.qcard .qm{flex:1;min-width:0}
+.qcard small{display:block;color:var(--muted);font-weight:700;font-size:.8rem}
+.qcard b{display:block;font-weight:800;font-size:1.12rem;line-height:1.2}
+.qcard .qnext{display:block;color:var(--muted);font-size:.86rem;margin-top:1px}
+.qdots{display:flex;gap:4px;margin-top:7px;flex-wrap:wrap}
+.qdots i{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.qdots i.d{background:var(--basil)}
+.qdots i.c{background:var(--ember);box-shadow:0 0 0 3px color-mix(in srgb,var(--ember) 25%,transparent)}
+.qcard .ghostbtn{flex:none}
+/* modal */
+.ovl{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(12,7,4,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.mbox{width:min(560px,100%);max-height:94vh;max-height:94dvh;overflow:auto;background:var(--bg-elev);border-radius:28px 28px 0 0;padding:10px 16px calc(20px + env(safe-area-inset-bottom,0px));animation:rise .4s cubic-bezier(.3,.7,.2,1);box-shadow:0 -10px 40px rgba(0,0,0,.3)}
+.mbox .grab{width:42px;height:5px;border-radius:9px;background:var(--line-2);margin:0 auto 10px}
+.mhead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mhead h2{font-size:1.35rem;font-weight:800;margin:0}
+.mbox .btn{margin-top:12px}
+.cardprev{margin-top:12px}
+.cardprev img{display:block;width:100%;max-width:400px;margin:0 auto;border-radius:18px;box-shadow:var(--shadow)}
+/* heat map */
+.hmcard{padding:14px 16px 16px}
+.hmwrap{position:relative;max-width:300px;margin:10px auto 0}
+.hmwrap svg{display:block;width:100%;overflow:visible}
+.hmgrid{position:absolute;left:17.2%;right:17.2%;top:16.3%;height:62.1%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);place-items:center;direction:ltr}
+.hmgrid input{width:58px;height:44px;border-radius:13px;border:1.5px solid rgba(255,236,214,.28);background:rgba(18,12,9,.78);color:#fff;text-align:center;font-family:"Bricolage Grotesque","Assistant",sans-serif;font-stretch:80%;font-weight:700;font-size:1.2rem;padding:0;-moz-appearance:textfield}
+.hmgrid input::-webkit-outer-spin-button,.hmgrid input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.hmgrid input::placeholder{color:rgba(255,236,214,.45);font-family:"Assistant",sans-serif;font-size:.85rem;font-weight:700}
+.hmgrid input.c{border-color:var(--ember-2)}
+.hmgrid input:focus{outline:0;border-color:var(--ember-2);box-shadow:0 0 0 3px color-mix(in srgb,var(--ember) 45%,transparent)}
+.hmleg{display:flex;align-items:center;gap:8px;max-width:300px;margin:12px auto 0;font-weight:700;font-size:.8rem;color:var(--muted)}
+.hmleg i{flex:1;height:8px;border-radius:99px;background:linear-gradient(90deg,#1b0c41,#7a1d6c 28%,#d4382b 52%,#f98e09 76%,#fcf3a6)}
+.hmmeta{text-align:center;color:var(--muted);font-size:.85rem;font-weight:600;margin:6px 0 0}
+.hmtxt{color:var(--muted);margin:10px 0 0}
+.hmcard .segc{margin-bottom:4px}
+/* journal extras */
+.entry .thumb{flex:none;width:52px;height:52px;border-radius:14px;object-fit:cover;background:var(--card-2)}
+.eact{display:flex;gap:18px}
+.del.share{color:var(--ember)}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -418,6 +513,10 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
   <section class="tab" id="tab-dough">
     <h1 class="title">מה אופים?</h1>
     <div class="stylecards" id="style-dough" role="radiogroup" aria-label="מה אופים"></div>
+    <div id="presets-wrap">
+      <div class="sublbl" id="presets-l">מתכון נפוליטני מוכן</div>
+      <div class="presets" id="presets" role="radiogroup" aria-labelledby="presets-l"></div>
+    </div>
 
     <div class="bento">
       <div class="card tile">
@@ -434,8 +533,17 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
 
     <div class="card panel">
       <div class="prow">
+        <div class="head"><b>קמח</b></div>
+        <div class="flours" id="flours" role="radiogroup" aria-label="סוג קמח"></div>
+        <div id="sharewrap">
+          <div class="head"><label for="share" id="share-l">כמה מהקמח</label><span class="v"><span class="num" id="share-v">50</span><small>%</small></span></div>
+          <input type="range" id="share" min="10" max="100" step="10">
+          <div class="feel" id="share-d"></div>
+        </div>
+      </div>
+      <div class="prow">
         <div class="head"><label for="hyd">הידרציה</label><span class="v"><span class="num" id="hyd-v">63</span><small>%</small></span></div>
-        <input type="range" id="hyd" min="55" max="80" step="1">
+        <input type="range" id="hyd" min="55" max="85" step="1">
         <div class="feel" id="hyd-d"></div>
       </div>
       <div class="prow">
@@ -443,8 +551,9 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
         <input type="range" id="salt" min="1.5" max="3.5" step="0.1">
       </div>
       <div class="prow">
-        <div class="head"><b>שמרים</b></div>
-        <div id="yeast" role="radiogroup" aria-label="סוג שמרים"></div>
+        <div class="head"><b>התפחה</b></div>
+        <div id="yeast" role="radiogroup" aria-label="שמרים או מחמצת"></div>
+        <div class="feel" id="leav-d"></div>
       </div>
     </div>
 
@@ -463,6 +572,7 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
     <h2 class="h2">מתי אוכלים?</h2>
     <div id="plan" role="radiogroup" aria-label="זמן תסיסה"></div>
     <p class="desc" id="plan-d"></p>
+    <p class="desc warnline" id="plan-w" hidden></p>
     <div id="roomwrap" style="margin-top:12px">
       <div id="room" role="radiogroup" aria-label="הטמפרטורה בבית"></div>
       <p class="desc" id="room-d"></p>
@@ -481,12 +591,37 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
     <ol class="tl" id="timeline"></ol>
   </section>
 
+  <!-- PARTY -->
+  <section class="tab" id="tab-party">
+    <h1 class="title">ערב פיצה</h1>
+    <p class="lead">מי בא ומה כל אחד רוצה. הבצק, הקניות והתור לטאבון מתעדכנים לבד.</p>
+    <div class="card addcard">
+      <label class="vh" for="g-name">שם האורח</label>
+      <input class="field" id="g-name" type="text" maxlength="20" autocomplete="off" enterkeyhint="done" placeholder="שם (לא חובה)">
+      <div class="menu" id="menu" role="radiogroup" aria-label="איזו פיצה"></div>
+      <button type="button" class="btn" id="g-add">הוספה לתור</button>
+    </div>
+    <ol class="card orders" id="orders" aria-label="התור לטאבון" hidden></ol>
+    <p class="desc" id="orders-empty">התור ריק. כל פיצה שתוסיף תיכנס לכאן לפי הסדר.</p>
+    <div id="partymore" hidden>
+      <div class="stats3 party" id="psum"></div>
+      <label class="card switch"><span><b>כדור ספייר</b><small>למקרה שבצק נקרע או שמישהו רוצה עוד</small></span><input type="checkbox" id="spare"></label>
+      <button type="button" class="btn ghost" id="p-dough"></button>
+      <h2 class="h2">רשימת קניות</h2>
+      <div class="card shopcard"><ul class="shop" id="shop"></ul></div>
+      <div class="btnrow"><button type="button" class="btn ghost" id="p-wa">שליחה בוואטסאפ</button><button type="button" class="btn ghost" id="p-copy">העתקה</button></div>
+      <button type="button" class="btn" id="p-start"></button>
+      <p style="text-align:center;margin:10px 0 0"><button type="button" class="del" id="p-clear">ניקוי התור</button></p>
+    </div>
+  </section>
+
   <!-- BAKE -->
   <section class="tab" id="tab-bake">
     <div class="bakehead">
       <h1 class="title" id="bakeTitle">הטאבון כבוי</h1>
     </div>
     <div class="chips" id="style-bake" role="radiogroup" aria-label="מה אופים"></div>
+    <div class="qcard" id="qcard" hidden aria-live="polite"></div>
 
     <div class="stage">
       <svg id="dial" class="dial" viewBox="0 0 360 380" role="img" aria-label="הטאבון במבט מלמעלה: המבער בצד שמאל ובגב, הפתח למטה">
@@ -546,6 +681,7 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
       <div class="gauge" dir="ltr" aria-hidden="true"><div class="band" id="band"></div><div class="mk" id="mk" hidden></div></div>
       <div class="gscale" dir="ltr" aria-hidden="true"><span>200°</span><span>300°</span><span>400°</span><span>500°</span></div>
       <p class="fb" id="tempfb" aria-live="polite"></p>
+      <button type="button" class="linkbtn" id="heatgo">מדידה של 9 נקודות למפת החום</button>
     </div>
 
     <button type="button" class="btn" id="primary"></button>
@@ -562,15 +698,19 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
       <div class="frow"><label class="lbl" for="f-note">הערה</label><textarea id="f-note" rows="2" placeholder="מה שמת עליה, מה תשנה בפעם הבאה"></textarea></div>
       <button type="button" class="btn ghost" id="f-save">שמור ביומן</button>
       <p class="tip" id="f-tip" hidden></p>
+      <button type="button" class="btn ghost" id="f-card">כרטיס שיתוף עם תמונה</button>
     </div>
 
     <label class="card switch"><span><b>צלילים ורטט</b><small>בכל סיבוב ובכל שינוי באש</small></span><input type="checkbox" id="sound"></label>
+    <label class="card switch" id="talk-wrap"><span><b>הטאבון מדבר</b><small id="talk-s">מקריא בקול מתי לסובב, מתי לשנות אש ומתי להוציא</small></span><input type="checkbox" id="talk"></label>
+    <label class="card switch" id="listen-wrap"><span><b>פקודות קוליות</b><small>אומרים ״הכנסתי״ או ״יצאה״ במקום ללחוץ. ניסיוני.</small></span><input type="checkbox" id="listen"></label>
   </section>
 
   <!-- LOG -->
   <section class="tab" id="tab-log">
     <h1 class="title">יומן</h1>
     <div id="logtop"></div>
+    <div id="heatsec"></div>
     <div id="logbody"></div>
     <p class="desc" id="logstatus" style="text-align:center;margin-top:16px"></p>
   </section>
@@ -599,6 +739,16 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
       <details><summary>הפיתות לא מתנפחות</summary><p>הבצק עבה מדי או לא אחיד, או שהאבן לא חמה מספיק. רדד לעובי אחיד של 4-5 מ״מ ותן לפיתות לנוח 10 דקות לפני האפייה.</p></details>
     </div>
 
+    <h2 class="h2">כוסמין, קמח מלא ומחמצת</h2>
+    <div class="card acc">
+      <details><summary>כמה לשים בצק כוסמין?</summary><p>פחות מהרגיל. הגלוטן של כוסמין נבנה מהר אבל הוא עדין, ולישה ארוכה מפרקת אותו. 4-5 דקות לישה עדינה מספיקות כשרוב הקמח כוסמין. הבצק יישאר קצת דביק, וזה תקין.</p></details>
+      <details><summary>בצק הכוסמין נקרע כשפותחים אותו</summary><p>בדרך כלל הוא תסס יותר מדי. כוסמין תוסס מהר יותר מחיטה ולא אוהב תסיסות ארוכות. בפעם הבאה קצר את התסיסה ל-24 שעות, או הורד את אחוז הכוסמין ל-30-50%. פתח בעדינות על השיש, בלי למתוח באוויר.</p></details>
+      <details><summary>בצק החיטה המלאה יבש וקשה לפתיחה</summary><p>הסובין סופג הרבה מים. העלה את ההידרציה בעוד 2-3%, ואל תוותר על ההשרייה: 40 דקות של קמח ומים לפני המלח והשמרים. עם 30% קמח מלא הבצק מתנהג כמעט כמו בצק רגיל.</p></details>
+      <details><summary>איך יודעים שהמחמצת מוכנה?</summary><p>היא הכפילה את הנפח, החלק העליון מעט מקומר ומלא בועות, והריח חמצמץ ונעים. זה השיא, בדרך כלל 4-6 שעות אחרי האכלה ביחס 1:2:2 בטמפרטורה של ⁦24°⁩. מחמצת שעברה את השיא ושקעה עדיין עובדת, אבל לאט יותר.</p></details>
+      <details><summary>הבצק עם המחמצת כמעט לא תפח</summary><p>המחמצת לא הייתה בשיא, או שהבית קר. תן לכדורים עוד שעה-שעתיים על השיש, עד שהם רכים ותפוחים. בפעם הבאה העלה את כמות המחמצת בכמה אחוזים, או השאר את הבצק שעה נוספת בחוץ לפני המקרר.</p></details>
+      <details><summary>הפיצה מקמח מלא משחימה מהר מדי</summary><p>בקמח מלא ובכוסמין יש יותר סוכרים פשוטים, אז הקרום משחים ונחרך מהר יותר. הכנס כשמרכז האבן ב-⁦400-420°⁩, והנמך את האש קצת יותר מוקדם.</p></details>
+    </div>
+
     <h2 class="h2">ניקוי ושמירה</h2>
     <div class="card prose">
       <p>בסוף האפייה השאר את האש מלאה עוד 10-15 דקות כדי לשרוף שאריות, ואז הברש את האבן.</p>
@@ -608,10 +758,14 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
   </section>
 </main>
 
+<div class="ovl" id="ovl" hidden role="dialog" aria-modal="true" aria-labelledby="mtitle"><div class="mbox" id="mbox"></div></div>
+<input type="file" id="photo" accept="image/*" hidden>
+
 <div class="dockwrap">
   <div class="toast" id="toast" role="status"></div>
   <nav class="dock" role="tablist" aria-label="ניווט">
     <button type="button" role="tab" data-tab="dough"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5h18a9 7.5 0 0 1-18 0Z"/><path d="M7 11.5c0-3 2.2-5 5-5s5 2 5 5"/></svg>בצק</button>
+    <button type="button" role="tab" data-tab="party" id="tab-btn-party"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.2 3.6 6.4a17 17 0 0 1 16.8 0Z"/><path d="M5.3 9.3a13.6 13.6 0 0 1 13.4 0"/><circle cx="10.6" cy="12.2" r="1"/><circle cx="13.6" cy="15.8" r="1"/></svg>ערב פיצה</button>
     <button type="button" role="tab" data-tab="bake" id="tab-btn-bake"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8c.6 3.2 4.9 5.3 4.9 10.6a4.9 4.9 0 0 1-9.8 0c0-2.2 1.1-3.6 2.2-4.4.2 1.7 1 2.8 2.2 3-.4-3.1-.6-6.3.5-9.2Z"/></svg>אפייה</button>
     <button type="button" role="tab" data-tab="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>יומן</button>
     <button type="button" role="tab" data-tab="tips"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3Z"/></svg>טיפים</button>
@@ -623,6 +777,7 @@ textarea{width:100%;min-height:70px;border-radius:16px;border:1.5px solid var(--
 "use strict";
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const NS='http://www.w3.org/2000/svg';
+const D=s=>'\u2066'+s+'\u2069';
 const LS={
   get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
@@ -633,17 +788,17 @@ const STYLES={
   napo:{name:'נפוליטנית',unit:'פיצה',icon:'ic-napo',meta:'כ-90 שניות',color:'var(--ember)',flourHint:'קמח 00 לפיצה',
     balls:4,weight:260,hyd:63,salt:2.8,oil:0,sugar:0,stone:[400,450],rotate:20,target:90,recover:90,
     readyCue:{flame:'low',text:'מדוד את מרכז האבן. רגע לפני ההכנסה הנמך לאש נמוכה.'},
-    cues:[{t:0,flame:'low',text:'האבן אופה את התחתית.'},{t:30,flame:'high',text:'הגבר כדי לחרוך את השוליים.'},{t:70,flame:'high',text:'שוליים תפוחים עם כתמים כהים? להוציא.'}],
+    cues:[{t:0,flame:'low',text:'האבן אופה את התחתית.'},{t:30,flame:'high',text:'הגבר כדי לחרוך את השוליים.',say:'הגבר את האש'},{t:70,flame:'high',text:'שוליים תפוחים עם כתמים כהים? להוציא.',say:'כמעט מוכנה. תבדוק את השוליים'}],
     open:'פותחים ביד מהמרכז החוצה ומשאירים שוליים של כ-1.5 ס״מ, בלי מערוך.'},
   ny:{name:'ניו יורק',unit:'פיצה',icon:'ic-ny',meta:'כ-5 דקות',color:'var(--gas)',flourHint:'קמח לחם או 00',
     balls:3,weight:300,hyd:63,salt:2.2,oil:2,sugar:1.5,stone:[300,350],rotate:60,target:300,recover:60,
-    readyCue:{flame:'low',text:'חכה שמרכז האבן יתייצב על 300-350°.'},
-    cues:[{t:0,flame:'low',text:'אש נמוכה לכל האורך, אפייה איטית ואחידה.'},{t:250,flame:'low',text:'הרם קצה ובדוק: תחתית שחומה ופריכה? להוציא.'}],
+    readyCue:{flame:'low',text:'חכה שמרכז האבן יתייצב על '+D('300-350°')+'.'},
+    cues:[{t:0,flame:'low',text:'אש נמוכה לכל האורך, אפייה איטית ואחידה.'},{t:250,flame:'low',text:'הרם קצה ובדוק: תחתית שחומה ופריכה? להוציא.',say:'תרים קצה ותבדוק את התחתית'}],
     open:'פותחים ביד לעיגול דק ואחיד עם שוליים צרים.'},
   pita:{name:'פיתות',unit:'פיתה',icon:'ic-pita',meta:'כ-75 שניות',color:'var(--amber)',flourHint:'קמח לבן או קמח לחם',
     balls:8,weight:100,hyd:62,salt:2,oil:1.5,sugar:1,stone:[400,450],rotate:30,target:75,recover:45,
     readyCue:{flame:'high',text:'אפשר להכניס פיתה אחת או שתיים.'},
-    cues:[{t:0,flame:'high',text:'הפיתה אמורה להתנפח תוך 30-60 שניות.'},{t:55,flame:'high',text:'התנפחה ושחמה קלות? להוציא ולעטוף במגבת.'}],
+    cues:[{t:0,flame:'high',text:'הפיתה אמורה להתנפח תוך 30-60 שניות.'},{t:55,flame:'high',text:'התנפחה ושחמה קלות? להוציא ולעטוף במגבת.',say:'התנפחה? להוציא'}],
     open:'מכניסים עם המרדה ישר למרכז האבן.'}
 };
 const PLANS={
@@ -652,10 +807,27 @@ const PLANS={
   c48:{name:'48 ש׳',idy:0.18,cold:true,hours:48,desc:'טעם עמוק יותר ושוליים אווריריים.'},
   c72:{name:'72 ש׳',idy:0.12,cold:true,hours:72,desc:'הכי הרבה טעם, ובצק רך מאוד לפתיחה.'}
 };
-const ROOM={cool:{name:'בית קריר',f:1.4,desc:'עד 22° בבית. מוסיפים קצת שמרים.'},normal:{name:'רגיל',f:1,desc:'23-26° בבית.'},hot:{name:'בית חם',f:0.6,desc:'27° ומעלה. מורידים שמרים ומשתמשים במים קרים.'}};
+const FLOURS={
+  w00:{name:'לבן 00',full:'קמח 00',desc:'קלאסי, הכי קל לפתיחה',hyd:0,speed:1,color:'#E9DCC3',def:100},
+  spelt:{name:'כוסמין',full:'קמח כוסמין לבן',short:'כוסמין',the:'הכוסמין',desc:'טעם אגוזי, בצק עדין',hyd:-3,speed:0.85,color:'#DDBF83',def:50,maxCold:[[60,48]],
+    tip:'כוסמין נותן טעם אגוזי ובצק רך ונמתח. הגלוטן שלו עדין, אז אם זו פעם ראשונה מתחילים ב-50%.'},
+  wspelt:{name:'כוסמין מלא',full:'קמח כוסמין מלא',short:'כוסמין מלא',the:'הכוסמין המלא',desc:'עשיר ומתוק, תוסס מהר',hyd:4,speed:0.7,color:'#B98A5A',def:30,maxCold:[[60,24],[30,48]],
+    tip:'כוסמין מלא תוסס מהר ונחלש בתסיסה ארוכה. 30% נותנים הרבה טעם ובצק שעדיין קל לפתוח.'},
+  ww:{name:'חיטה מלאה',full:'קמח חיטה מלא',short:'חיטה מלאה',the:'החיטה המלאה',desc:'טעם עמוק, צריך יותר מים',hyd:10,speed:0.75,color:'#9C7048',def:30,maxCold:[[70,48]],
+    tip:'קמח מלא סופג יותר מים, אז ההידרציה עולה אוטומטית. מעל 50% השוליים יהיו פחות אווריריים.'}
+};
+const SOUR={same:20,c24:15,c48:10,c72:7};
+const PRESETS=[
+  {id:'classic',name:'קלאסית 00',meta:'שמרים, 24 ש׳',flour:'w00',yeast:'dry',plan:'c24',hyd:63},
+  {id:'sour',name:'מחמצת',meta:'קמח 00, 48 ש׳',flour:'w00',yeast:'sour',plan:'c48',hyd:64},
+  {id:'spelt',name:'כוסמין',meta:'50% כוסמין, 24 ש׳',flour:'spelt',share:50,yeast:'dry',plan:'c24',hyd:63},
+  {id:'wspelt',name:'כוסמין מלא ומחמצת',meta:'30%, 24 ש׳',flour:'wspelt',share:30,yeast:'sour',plan:'c24',hyd:63},
+  {id:'ww',name:'חיטה מלאה',meta:'30% מלא, 48 ש׳',flour:'ww',share:30,yeast:'dry',plan:'c48',hyd:63}
+];
+const ROOM={cool:{name:'בית קריר',f:1.4,desc:'עד '+D('22°')+' בבית. מוסיפים קצת שמרים.'},normal:{name:'רגיל',f:1,desc:D('23-26°')+' בבית.'},hot:{name:'בית חם',f:0.6,desc:D('27°')+' ומעלה. מורידים שמרים ומשתמשים במים קרים.'}};
 const PREHEAT=25*60;
 const WEEK=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
-const ING_COLORS={flour:'#D9C7A8',water:'var(--gas)',salt:'#CFC8BE',yeast:'var(--amber)',oil:'#9DB04A',sugar:'#E49AB0'};
+const ING_COLORS={flour:'#D9C7A8',flour2:'#B98A5A',water:'var(--gas)',salt:'#CFC8BE',yeast:'var(--amber)',starter:'#C7AE7E',oil:'#9DB04A',sugar:'#E49AB0'};
 
 /* ---------- state ---------- */
 const saved=LS.get('tabun.settings',{});
@@ -665,13 +837,18 @@ const state={
   style:STYLES[saved.style]?saved.style:'napo',
   plan:PLANS[saved.plan]?saved.plan:'c24',
   room:ROOM[saved.room]?saved.room:'normal',
-  yeast:saved.yeast==='fresh'?'fresh':'dry',
+  yeast:['dry','fresh','sour'].includes(saved.yeast)?saved.yeast:'dry',
+  flour:FLOURS[saved.flour]?saved.flour:'w00',
+  share:Object.assign({spelt:50,wspelt:30,ww:30},saved.share||{}),
   sound:saved.sound!==false,
-  tab:['dough','bake','log','tips'].includes(saved.tab)?saved.tab:'dough',
+  talk:saved.talk!==false,
+  listen:saved.listen===true,
+  heatView:saved.heatView==='last'?'last':'avg',
+  tab:['dough','party','bake','log','tips'].includes(saved.tab)?saved.tab:'dough',
   eat:typeof saved.eat==='number'?saved.eat:null,
   per
 };
-function save(){LS.set('tabun.settings',{style:state.style,plan:state.plan,room:state.room,yeast:state.yeast,sound:state.sound,tab:state.tab,eat:state.eat,per:state.per});}
+function save(){LS.set('tabun.settings',{style:state.style,plan:state.plan,room:state.room,yeast:state.yeast,flour:state.flour,share:state.share,sound:state.sound,talk:state.talk,listen:state.listen,heatView:state.heatView,tab:state.tab,eat:state.eat,per:state.per});}
 
 /* ---------- helpers ---------- */
 const rotTxt=n=>n===1?'סיבוב אחד':n+' סיבובים';
@@ -731,14 +908,30 @@ function placeAll(){segEls.forEach(placeInd);}
 window.addEventListener('resize',placeAll);
 
 /* ---------- dough ---------- */
+function fl(){const k=state.flour,f=FLOURS[k];return {k,f,sh:k==='w00'?0:state.share[k]};}
+function hydDelta(){const {f,sh}=fl();return f.hyd*sh/100;}
+function effHyd(){return Math.round(Math.min(85,Math.max(55,state.per[state.style].hyd+hydDelta())));}
+function speed(){const {f,sh}=fl();return 1-(1-f.speed)*sh/100;}
+function coldLimit(){const {f,sh}=fl();if(!f.maxCold)return 99;for(const [thr,h] of f.maxCold)if(sh>=thr)return h;return 99;}
 function recipe(){
   const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan];
-  const idy=plan.idy*(plan.cold?1:ROOM[state.room].f);
-  const yPct=state.yeast==='dry'?idy:idy*3;
+  const roomF=plan.cold?1:ROOM[state.room].f,sp=speed(),hyd=effHyd(),sour=state.yeast==='sour';
+  let yPct=0,sPct=0;
+  if(sour)sPct=SOUR[state.plan]*roomF*sp;
+  else{const idy=plan.idy*roomF*sp;yPct=state.yeast==='dry'?idy:idy*3;}
   const total=p.balls*p.weight*1.02;
-  const flour=total*100/(100+p.hyd+p.salt+yPct+s.oil+s.sugar);
-  return {total,flour,water:flour*p.hyd/100,salt:flour*p.salt/100,yeast:flour*yPct/100,oil:flour*s.oil/100,sugar:flour*s.sugar/100};
+  const TF=total*100/(100+hyd+p.salt+yPct+s.oil+s.sugar);
+  const starter=TF*sPct/100,flour=TF-starter/2;
+  const {sh}=fl(),special=flour*sh/100;
+  return {total,TF,hyd,sour,sPct,starter,flour,base:flour-special,special,water:TF*hyd/100-starter/2,salt:TF*p.salt/100,yeast:TF*yPct/100,oil:TF*s.oil/100,sugar:TF*s.sugar/100};
 }
+function doughLabel(){
+  const {k,f,sh}=fl(),parts=[];
+  if(k!=='w00')parts.push(sh+'% '+f.short);
+  if(state.yeast==='sour')parts.push('מחמצת');
+  return parts.join(', ');
+}
+const ceil5=n=>Math.max(5,Math.ceil(n/5)*5);
 function hydFeel(h){
   if(h<60)return 'בצק יבש יחסית, קל מאוד לעבודה.';
   if(h<=65)return 'קלאסי. נוח לעבודה ונותן שוליים טובים.';
@@ -747,30 +940,94 @@ function hydFeel(h){
 }
 function setRange(el,v){el.value=v;const p=(v-el.min)/(el.max-el.min)*100;el.style.setProperty('--p',p+'%');}
 function defaultEat(){
-  const plan=PLANS[state.plan];
-  const need=(plan.cold?plan.hours+4:8)*3600e3;
-  const earliest=new Date(Date.now()+need+15*60e3);
-  const d=new Date(earliest);d.setHours(19,30,0,0);
-  if(d<earliest)d.setDate(d.getDate()+1);
+  const lim=Date.now()+15*60e3,d=new Date();d.setHours(19,30,0,0);
+  for(let i=0;i<14;i++){if(steps(d.getTime())[0].t>=lim)break;d.setDate(d.getDate()+1);}
   return d.getTime();
 }
 function steps(T){
-  const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan];
+  const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan],r=recipe();
   const H=3600e3,M=60e3,out=[];
+  const {k,f,sh}=fl(),sour=r.sour,ww=k==='ww',spelt=k==='spelt'||k==='wspelt';
   const extras=(s.oil?', שמן':'')+(s.sugar?' וסוכר':'');
+  const knead=spelt&&sh>=50?'לשים בעדינות 4-5 דקות בלבד, עד שהבצק אחיד. כוסמין בונה גלוטן מהר ונקרע כשלשים יותר מדי.'
+    :spelt?'לשים 6-7 דקות, קצת פחות מהרגיל בגלל הכוסמין.':'לשים 8-10 דקות עד שהבצק חלק ואלסטי.';
+  const cw=plan.cold||state.room==='hot'?' קרים':'';
+  const hold=ww?ceil5(r.water*0.08):0;
+  let mix;
+  if(ww)mix='מוסיפים לקמח המושרה את המלח, '+(sour?'המחמצת':'השמרים')+extras+' ואת '+hold+' ג׳ המים שנשארו, ו'+knead;
+  else if(sour)mix='ממיסים את המלח במים'+cw+', מערבבים פנימה את המחמצת, מוסיפים את הקמח'+extras+' ו'+knead;
+  else mix='ממיסים את המלח במים'+cw+', מוסיפים קמח ושמרים'+extras+' ו'+knead;
+  let kneadT;
   if(plan.cold){
-    out.push({t:T-(plan.hours+4)*H,title:'לשים את הבצק',text:'ממיסים את המלח במים קרים, מוסיפים קמח ושמרים'+extras+' ולשים 8-10 דקות עד שהבצק חלק ואלסטי. מכסים לשעה.'});
-    out.push({t:T-(plan.hours+3)*H,title:'כדורים ולמקרר',text:'מחלקים ל-'+p.balls+' כדורים של '+p.weight+' ג׳, מהדקים היטב ומכניסים לקופסה סגורה ומשומנת קלות.'});
-    out.push({t:T-3*H,title:'מוציאים מהמקרר',text:'משאירים מכוסה על השיש עד שהבצק מגיע לטמפרטורת החדר.'});
+    const pre=sour?6:4;kneadT=T-(plan.hours+pre)*H;
+    out.push({t:kneadT,title:'לשים את הבצק',text:mix+(sour?' מכסים ל-2 שעות בטמפרטורת החדר.':' מכסים לשעה.')});
+    out.push({t:T-(plan.hours+(sour?4:3))*H,title:'כדורים ולמקרר',text:'מחלקים ל-'+p.balls+' כדורים של '+p.weight+' ג׳, מהדקים היטב ומכניסים לקופסה סגורה ומשומנת קלות.'});
+    out.push({t:T-(sour?4:3)*H,title:'מוציאים מהמקרר',text:sour?'משאירים מכוסה על השיש 3-4 שעות, עד שהכדורים תפוחים ורכים. מחמצת מתעוררת לאט יותר משמרים.':'משאירים מכוסה על השיש עד שהבצק מגיע לטמפרטורת החדר.'});
   }else{
-    out.push({t:T-8*H,title:'לשים את הבצק',text:'ממיסים את המלח במים, מוסיפים קמח ושמרים'+extras+' ולשים 8-10 דקות עד שהבצק חלק ואלסטי. מכסים לשעתיים.'});
-    out.push({t:T-6*H,title:'חלוקה לכדורים',text:'מחלקים ל-'+p.balls+' כדורים של '+p.weight+' ג׳, מכסים ומשאירים על השיש. הם אמורים כמעט להכפיל את הנפח.'});
+    kneadT=T-(sour?9:8)*H;
+    out.push({t:kneadT,title:'לשים את הבצק',text:mix+(sour?' מכסים ל-4 שעות.':' מכסים לשעתיים.')});
+    out.push({t:T-(sour?5:6)*H,title:'חלוקה לכדורים',text:'מחלקים ל-'+p.balls+' כדורים של '+p.weight+' ג׳, מכסים ומשאירים על השיש. '+(sour?'הם אמורים לגדול בכ-50% ולהיות רכים ואווריריים.':'הם אמורים כמעט להכפיל את הנפח.')});
+  }
+  if(ww)out.push({t:kneadT-45*M,title:'משרים את הקמח',text:'מערבבים את כל הקמח עם המים, חוץ מ-'+hold+' ג׳, רק עד שאין קמח יבש. מכסים ל-40 דקות: הסובין סופג מים והבצק יהיה רך וקל לעבודה.'});
+  if(sour){
+    const need=r.starter;let ft=kneadT-(ww?45*M:0)-6*H,ratio=2;
+    const h=new Date(ft).getHours();
+    if(h<7||h>=23){ft=ft-6*H;ratio=5;}
+    const seed=ceil5(need*1.2/(1+2*ratio)),add=seed*ratio;
+    out.push({t:ft,title:'מאכילים את המחמצת',text:'מערבבים '+seed+' ג׳ מחמצת עם '+add+' ג׳ קמח ו-'+add+' ג׳ מים'+(ratio===5?' (יחס 1:5:5, כדי שתגיע לשיא לאט, תוך 10-12 שעות).':'. היא צריכה להכפיל נפח ולהגיע לשיא תוך 4-6 שעות.')+' לבצק צריך '+grams(need)+' ג׳, את השאר מחזירים למקרר.'});
   }
   out.push({t:T-30*M,title:'מדליקים את הטאבון',text:'אש מלאה ל-25-30 דקות. בינתיים מכינים רוטב ותוספות.'});
   if(state.style==='pita')out.push({t:T-20*M,title:'מרדדים',text:'לעיגולים של 15 ס״מ בעובי אחיד של 4-5 מ״מ. מכסים ל-10 דקות.'});
-  out.push({t:T-5*M,title:'מודדים את האבן',text:'במרכז האבן. היעד: '+s.stone[0]+'-'+s.stone[1]+'°.'});
-  out.push({t:T,title:state.style==='pita'?'פיתה ראשונה':'פיצה ראשונה',text:s.open+' הטיימר מחכה בלשונית אפייה.'});
+  const brown=k!=='w00'&&sh>=30;
+  out.push({t:T-5*M,title:'מודדים את האבן',text:'במרכז האבן. היעד: '+D(s.stone[0]+'-'+(brown?s.stone[0]+20:s.stone[1])+'°')+'.'+(brown?' קמח מלא וכוסמין משחימים מהר יותר, אז מכוונים לקצה התחתון.':'')});
+  out.push({t:T,title:state.style==='pita'?'פיתה ראשונה':'פיצה ראשונה',text:s.open+(spelt&&sh>=50&&state.style!=='pita'?' בצק כוסמין עדין: פותחים על השיש ולא מותחים באוויר.':'')+' הטיימר מחכה בלשונית אפייה.'});
   return out.sort((a,b)=>a.t-b.t);
+}
+function renderPresets(){
+  const box=$('#presets');
+  $('#presets-wrap').hidden=state.style!=='napo';
+  if(!box.childElementCount){
+    for(const pr of PRESETS){
+      const b=document.createElement('button');b.type='button';b.className='pr';b.setAttribute('role','radio');b.dataset.v=pr.id;
+      const dots=document.createElement('span');dots.className='dots';dots.setAttribute('aria-hidden','true');
+      const d1=document.createElement('i');d1.style.background=FLOURS[pr.flour].color;dots.appendChild(d1);
+      if(pr.yeast==='sour'){const d2=document.createElement('i');d2.style.background=ING_COLORS.starter;dots.appendChild(d2);}
+      const n=document.createElement('b');n.textContent=pr.name;const m=document.createElement('small');m.textContent=pr.meta;
+      b.append(dots,n,m);b.addEventListener('click',()=>applyPreset(pr));box.appendChild(b);
+    }
+  }
+  const p=state.per.napo;
+  $$('#presets .pr').forEach(b=>{
+    const pr=PRESETS.find(x=>x.id===b.dataset.v);
+    const on=state.style==='napo'&&pr.flour===state.flour&&(pr.flour==='w00'||pr.share===state.share[pr.flour])&&pr.yeast===state.yeast&&pr.plan===state.plan&&Math.round(p.hyd)===pr.hyd;
+    b.setAttribute('aria-checked',String(on));
+  });
+}
+function applyPreset(pr){
+  state.style='napo';state.flour=pr.flour;if(pr.share)state.share[pr.flour]=pr.share;
+  state.yeast=pr.yeast;state.plan=pr.plan;state.per.napo.hyd=pr.hyd;
+  if(!state.eat||steps(state.eat)[0].t<Date.now())state.eat=defaultEat();
+  save();renderStyleCards();renderDough();paint();update();
+  toast(pr.name+': המתכון והלוח עודכנו');
+}
+function renderFlours(){
+  const box=$('#flours');
+  if(!box.childElementCount){
+    for(const k in FLOURS){
+      const f=FLOURS[k],b=document.createElement('button');b.type='button';b.className='fl';b.setAttribute('role','radio');b.dataset.v=k;
+      const dot=document.createElement('i');dot.style.background=f.color;dot.setAttribute('aria-hidden','true');
+      const t=document.createElement('span');const n=document.createElement('b');n.textContent=f.name;const m=document.createElement('small');m.textContent=f.desc;t.append(n,m);
+      b.append(dot,t);b.addEventListener('click',()=>{state.flour=k;save();renderDough();});box.appendChild(b);
+    }
+  }
+  $$('#flours .fl').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.v===state.flour)));
+  const {k,f,sh}=fl();
+  $('#sharewrap').hidden=k==='w00';
+  if(k!=='w00'){
+    $('#share-l').textContent='כמה '+f.short;
+    setRange($('#share'),sh);$('#share-v').textContent=sh;
+    $('#share-d').textContent=(sh<100?sh+'% '+f.short+' ו-'+(100-sh)+'% קמח לבן. ':'רק '+f.short+'. ')+f.tip;
+  }
 }
 function renderStyleCards(){
   const box=$('#style-dough');
@@ -798,22 +1055,29 @@ function renderDough(){
   const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan];
   $('#balls-lbl').textContent=state.style==='pita'?'כמה פיתות':'כמה כדורים';
   $('#balls-v').textContent=p.balls;$('#weight-v').textContent=p.weight;
-  setRange($('#hyd'),p.hyd);$('#hyd-v').textContent=p.hyd;$('#hyd-d').textContent=hydFeel(p.hyd);
+  renderPresets();renderFlours();
+  const {k:fk,f:ff,sh}=fl(),dlt=Math.round(hydDelta()),eh=effHyd();
+  setRange($('#hyd'),eh);$('#hyd-v').textContent=eh;
+  $('#hyd-d').textContent=hydFeel(eh-dlt)+(dlt?' כולל '+(dlt>0?'+':'−')+Math.abs(dlt)+'% בגלל '+ff.the+'.':'');
   setRange($('#salt'),p.salt);$('#salt-v').textContent=p.salt.toFixed(1);
-  seg($('#yeast'),[['dry','יבשים (אינסטנט)'],['fresh','טריים']],state.yeast,v=>{state.yeast=v;save();renderDough();});
+  seg($('#yeast'),[['dry','יבשים'],['fresh','טריים'],['sour','מחמצת']],state.yeast,v=>{
+    state.yeast=v;save();renderDough();
+  });
 
   const r=recipe(),coldWater=plan.cold||state.room==='hot';
-  const rows=[
-    ['flour','קמח',r.flour,s.flourHint],
-    ['water','מים',r.water,coldWater?'קרים':'בטמפרטורת החדר'],
-    ['salt','מלח',r.salt,''],
-    ['yeast',state.yeast==='dry'?'שמרים יבשים':'שמרים טריים',r.yeast,state.yeast==='dry'?tsp(r.yeast):'']
-  ];
+  $('#leav-d').textContent=r.sour?'מחמצת פעילה ב-100% הידרציה (משקל שווה של קמח ומים), בשיא אחרי האכלה. הכמות כבר מקוזזת מהקמח והמים.':state.yeast==='dry'?'שמרים יבשים אינסטנט. טריים? כפול 3 במשקל.':'שמרים טריים, מפוררים לתוך המים.';
+  ING_COLORS.flour2=ff.color;
+  const rows=[];
+  if(r.base>0.5)rows.push(['flour',fk==='w00'?'קמח':'קמח לבן',r.base,s.flourHint]);
+  if(r.special>0.5)rows.push(['flour2',ff.full,r.special,sh+'% מהקמח']);
+  rows.push(['water','מים',r.water,coldWater?'קרים':'בטמפרטורת החדר'],['salt','מלח',r.salt,'']);
+  if(r.sour)rows.push(['starter','מחמצת פעילה',r.starter,'בשיא, '+Math.round(r.sPct)+'% מהקמח']);
+  else rows.push(['yeast',state.yeast==='dry'?'שמרים יבשים':'שמרים טריים',r.yeast,state.yeast==='dry'?tsp(r.yeast):'']);
   if(s.oil)rows.push(['oil','שמן זית',r.oil,'']);
   if(s.sugar)rows.push(['sugar','סוכר',r.sugar,'או דבש']);
   $('#total').textContent=fmtInt(r.total);
   const bar=$('#bar');
-  const want=rows.map(x=>x[0]).join();
+  const want=rows.map(x=>x[0]+ING_COLORS[x[0]]).join();
   if(bar._key!==want){bar._key=want;bar.textContent='';for(const x of rows){const i=document.createElement('i');i.style.background=ING_COLORS[x[0]];i.dataset.k=x[0];bar.appendChild(i);}}
   for(const x of rows){const i=bar.querySelector('[data-k="'+x[0]+'"]');if(i)i.style.flex=x[2]+' 1 0';}
   const ul=$('#ing');ul.textContent='';
@@ -833,6 +1097,9 @@ function renderDough(){
     save();renderDough();
   });
   $('#plan-d').textContent=plan.desc;
+  const lim=coldLimit(),pw=$('#plan-w');
+  if(plan.cold&&plan.hours>lim){pw.hidden=false;pw.textContent='עם '+sh+'% '+ff.short+' עדיף עד '+lim+' שעות במקרר. '+(fk==='ww'?'קמח מלא תוסס מהר והבצק נחלש בתסיסה ארוכה מדי.':'הגלוטן של כוסמין נחלש בתסיסה ארוכה, והבצק יקרע בפתיחה.');}
+  else pw.hidden=true;
   $('#roomwrap').hidden=plan.cold;
   seg($('#room'),Object.entries(ROOM).map(([k,v])=>[k,v.name]),state.room,v=>{state.room=v;save();renderDough();});
   $('#room-d').textContent=ROOM[state.room].desc;
@@ -889,16 +1156,25 @@ function bindStepper(id,key,step,min,max){
 }
 bindStepper('balls','balls',1,1,30);
 bindStepper('weight','weight',10,60,450);
-$('#hyd').addEventListener('input',e=>{state.per[state.style].hyd=+e.target.value;save();renderDough();});
+$('#hyd').addEventListener('input',e=>{state.per[state.style].hyd=Math.round((+e.target.value-hydDelta())*10)/10;save();renderDough();});
+$('#share').addEventListener('input',e=>{if(state.flour!=='w00'){state.share[state.flour]=+e.target.value;save();renderDough();}});
 $('#salt').addEventListener('input',e=>{state.per[state.style].salt=Math.round(+e.target.value*10)/10;save();renderDough();});
 $('#time-p').addEventListener('click',()=>{state.eat+=15*60e3;save();renderWhen();});
 $('#time-m').addEventListener('click',()=>{state.eat-=15*60e3;save();renderWhen();});
 $('#warn-fix').addEventListener('click',()=>{state.eat=defaultEat();save();renderWhen();toast('נקבע לזמן הקרוב שאפשר');});
 $('#copy').addEventListener('click',async()=>{
   const s=STYLES[state.style],p=state.per[state.style],r=recipe(),plan=PLANS[state.plan];
-  const lines=[s.name+': '+p.balls+' × '+p.weight+' ג׳, הידרציה '+p.hyd+'%','קמח: '+grams(r.flour)+' ג׳','מים: '+grams(r.water)+' ג׳','מלח: '+grams(r.salt)+' ג׳',(state.yeast==='dry'?'שמרים יבשים: ':'שמרים טריים: ')+grams(r.yeast)+' ג׳'];
+  const {k:fk,f:ff}=fl(),dl=doughLabel();
+  const lines=[s.name+(dl?' ('+dl+')':'')+': '+p.balls+' × '+p.weight+' ג׳, הידרציה '+r.hyd+'%'];
+  if(r.base>0.5)lines.push((fk==='w00'?'קמח: ':'קמח לבן: ')+grams(r.base)+' ג׳');
+  if(r.special>0.5)lines.push(ff.full+': '+grams(r.special)+' ג׳');
+  lines.push('מים: '+grams(r.water)+' ג׳','מלח: '+grams(r.salt)+' ג׳');
+  lines.push(r.sour?'מחמצת פעילה (100%): '+grams(r.starter)+' ג׳':(state.yeast==='dry'?'שמרים יבשים: ':'שמרים טריים: ')+grams(r.yeast)+' ג׳');
   if(s.oil)lines.push('שמן זית: '+grams(r.oil)+' ג׳');if(s.sugar)lines.push('סוכר: '+grams(r.sugar)+' ג׳');
   lines.push('תסיסה: '+(plan.cold?plan.hours+' שעות במקרר':'באותו יום'));
+  const st=steps(state.eat||defaultEat());
+  lines.push('','שלבים:');
+  for(const x of st){const d=new Date(x.t);lines.push(dayLabel(d)+' '+hhmm(d)+': '+x.title);}
   const txt=lines.join('\n');
   try{await navigator.clipboard.writeText(txt);toast('המתכון הועתק');}
   catch(e){
@@ -909,7 +1185,7 @@ $('#copy').addEventListener('click',async()=>{
 
 /* ---------- sound, vibration, screen ---------- */
 let actx=null;
-function ensureAudio(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();}catch(e){}}
+function ensureAudio(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();}catch(e){}Voice.prime();}
 function beep(n,f){
   if(!actx)return;
   try{
@@ -1026,7 +1302,8 @@ function toReady(){ensureAudio();bake.ended=false;bake.phase='ready';keepAwake(t
 function endSession(ended){bake.phase='idle';bake.ended=ended;bake.count=0;keepAwake(false);stopTick();ui.pizzaMove.classList.add('gone');paint();update();}
 function launch(){
   ensureAudio();
-  bake.style=state.style;bake.phase='bake';bake.t0=Date.now();bake.rotations=0;bake.cueIdx=-1;bake.turnUntil=0;bake.recovered=false;
+  bake.style=state.style;bake.phase='bake';bake.t0=Date.now();bake.rotations=0;bake.cueIdx=-1;bake.turnUntil=0;bake.recovered=false;bake.saidTarget=false;
+  {const o=party.active?curOrder():null;Voice.say(o?orderName(o)+' בפנים.':'בפנים.',true);}
   const pm=ui.pizzaMove;
   ui.pizza.classList.add('snap');ui.pizza.style.transform='rotate(0deg)';
   pm.classList.add('snap','gone');pm.getBoundingClientRect();
@@ -1044,11 +1321,21 @@ function takeOut(){
   bake.phase='after';bake.recoverEnd=Date.now()+st.recover*1000;bake.recovered=false;bake.count++;
   bake.entry={id:'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),ts:Date.now(),style:bake.style,
     stoneTemp:typeof bake.stoneTemp==='number'?bake.stoneTemp:null,seconds:secs,rotations:bake.rotations,rating:null,base:null,top:null,note:''};
+  const dlb=doughLabel();if(dlb)bake.entry.dough=dlb;
+  {const pl=PLANS[state.plan];bake.entry.plan=pl.cold?pl.hours:0;}
+  let remain=-1;
+  if(party.active){
+    const o=curOrder();
+    if(o){o.done=true;o.at=Date.now();o.entry=bake.entry.id;bake.entry.pizza=o.type;if(o.name)bake.entry.guest=o.name;saveParty();}
+    remain=party.orders.filter(x=>!x.done).length;
+    renderParty();
+  }
+  Voice.say(remain===0?'זהו, כל הפיצות יצאו. בתיאבון!':remain===1?'יצאה! נשארה עוד פיצה אחת.':remain>1?'יצאה! נשארו עוד '+remain+' פיצות.':'יצאה. האבן מתאוששת.',true);
   queuePut(bake.entry);
   bake.form={rating:null,base:null,top:null};
   $('#f-note').value='';$('#f-tip').hidden=true;
   const fs=$('#f-save');fs.textContent='שמור ביומן';fs.disabled=false;
-  $('#logmeta').textContent=mmss(secs)+' דקות, '+rotTxt(bake.rotations)+(bake.entry.stoneTemp?', אבן '+bake.entry.stoneTemp+'°':'')+'. כבר רשום ביומן.';
+  $('#logmeta').textContent=mmss(secs)+' דקות, '+rotTxt(bake.rotations)+(bake.entry.stoneTemp?', אבן '+D(bake.entry.stoneTemp+'°'):'')+'. כבר רשום ביומן.';
   ui.pizzaMove.classList.add('gone');
   paint();renderForm();update();
 }
@@ -1076,7 +1363,7 @@ function paint(){
   }else if(ph==='ready'){
     ui.title.textContent='חם ומוכן';
     setCue(st.readyCue.flame,FLAME_T[st.readyCue.flame],st.readyCue.text);
-    P.textContent='הכנסתי '+st.unit;P.onclick=launch;
+    {const o=party.active?curOrder():null;P.textContent=o?'הכנסתי: '+orderName(o):'הכנסתי '+st.unit;}P.onclick=launch;
     S.textContent='סיימתי לאפות';S.onclick=()=>endSession(true);
   }else if(ph==='bake'){
     ui.title.textContent='בתנור';
@@ -1089,6 +1376,7 @@ function paint(){
     S.textContent='סיימתי לאפות';S.onclick=()=>endSession(true);
   }
   ui.session.textContent=bake.count?(bake.count===1?'אפייה אחת בסשן הזה':bake.count+' אפיות בסשן הזה'):'';
+  renderQueue();Ears.sync();
 }
 function setStatus(text,cls){
   if(ui.statusText.textContent!==text)ui.statusText.textContent=text;
@@ -1101,22 +1389,23 @@ function update(){
     setBig(mmss(PREHEAT));ui.sub.textContent='זמן חימום מומלץ';setProg(0);setHeat(0);setStatus('כבוי','');
   }else if(ph==='preheat'){
     const left=(bake.preheatEnd-now)/1000;
-    if(left<=0){bake.phase='ready';signal(3,740);paint();update();return;}
+    if(left<=0){bake.phase='ready';signal(3,740);Voice.say('הטאבון חם. אפשר להתחיל.',true);paint();update();return;}
     const prog=1-left/PREHEAT;
     setBig(mmss(Math.ceil(left)));ui.sub.textContent='האבן מתחממת';setProg(prog);setHeat(0.15+0.75*prog);
     setStatus('מתחמם '+mmss(Math.ceil(left)),'warm');
   }else if(ph==='ready'){
     setBig('0:00');
-    ui.sub.textContent=typeof bake.stoneTemp==='number'?'האבן נמדדה '+bake.stoneTemp+'°':'מדוד את האבן לפני ההכנסה';
+    ui.sub.textContent=typeof bake.stoneTemp==='number'?'האבן נמדדה '+D(bake.stoneTemp+'°'):'מדוד את האבן לפני ההכנסה';
     setProg(0);setHeat(0.9);setStatus('חם ומוכן','hot');
   }else if(ph==='bake'){
     const el=(now-bake.t0)/1000;
     setBig(mmss(Math.floor(el)));
     const k=Math.floor(el/st.rotate);
-    if(k>bake.rotations){bake.rotations=k;ui.pizza.style.transform='rotate('+(-90*k)+'deg)';bake.turnUntil=now+2600;signal(1,880);}
+    if(k>bake.rotations){bake.rotations=k;ui.pizza.style.transform='rotate('+(-90*k)+'deg)';bake.turnUntil=now+2600;signal(1,880);Voice.say('סובב',true);}
     const into=el%st.rotate;setProg(into/st.rotate);setHeat(1);
     let idx=0;st.cues.forEach((c,i)=>{if(el>=c.t)idx=i;});
-    if(idx!==bake.cueIdx){const first=bake.cueIdx===-1;bake.cueIdx=idx;bake.cue=st.cues[idx];if(!first&&now>=bake.turnUntil)signal(2,660);}
+    if(idx!==bake.cueIdx){const first=bake.cueIdx===-1;bake.cueIdx=idx;bake.cue=st.cues[idx];if(!first){if(now>=bake.turnUntil)signal(2,660);if(bake.cue.say)Voice.say(bake.cue.say);}}
+    if(el>=st.target&&!bake.saidTarget){bake.saidTarget=true;Voice.say(curKey()==='pita'?'הזמן עבר. להוציא אם התנפחה':'עבר הזמן. תבדוק אם מוכנה');}
     ui.sub.textContent=el<st.target?'סיבוב '+(k+1)+' בעוד '+Math.ceil(st.rotate-into)+' שניות':'עבר הזמן המשוער, בדוק אם מוכנה';
     if(now<bake.turnUntil){
       ui.dial.classList.add('turn');
@@ -1133,7 +1422,7 @@ function update(){
       setBig(mmss(Math.ceil(left)));ui.sub.textContent='האבן מתאוששת';setProg(1-left/st.recover);setHeat(0.7+0.2*(1-left/st.recover));
       setStatus('מתאושש '+mmss(Math.ceil(left)),'warm');
     }else{
-      if(!bake.recovered){bake.recovered=true;signal(2,740);paint();}
+      if(!bake.recovered){bake.recovered=true;signal(2,740);{const o=party.active?curOrder():null;Voice.say(o?'האבן מוכנה. הבאה: '+orderName(o)+'.':(party.active?'':'האבן מוכנה לבאה.'));}paint();}
       setBig('0:00');ui.sub.textContent='מוכן לבאה';setProg(1);setHeat(0.9);setStatus('מוכן לבאה','hot');
     }
   }
@@ -1213,7 +1502,7 @@ function insights(items){
     if(good.length>=2){
       const temps=good.map(e=>e.stoneTemp),secs=good.map(e=>e.seconds||0);
       const avg=Math.round(secs.reduce((a,b)=>a+b,0)/secs.length);
-      out.push(STYLES[k].name+': האפיות שדירגת 4 ומעלה יצאו כשהאבן הייתה '+Math.min(...temps)+'-'+Math.max(...temps)+'°, ובממוצע '+mmss(avg)+' דקות בטאבון.');
+      out.push(STYLES[k].name+': האפיות שדירגת 4 ומעלה יצאו כשהאבן הייתה '+D(Math.min(...temps)+'-'+Math.max(...temps)+'°')+', ובממוצע '+mmss(avg)+' דקות בטאבון.');
     }
   }
   const recent=items.filter(e=>e.base).slice(0,10);
@@ -1279,12 +1568,14 @@ function renderLog(){
     const d=new Date(e.ts||0),dl=dayLabel(d)+(Math.abs(Date.now()-d)>6*864e5?' '+d.getDate()+'.'+(d.getMonth()+1):'');
     if(dl!==lastDay){lastDay=dl;body.appendChild(el('div','dayhead',dl));}
     const card=el('div','card entry'),row=el('div','top');
-    row.appendChild(useIcon(STYLES[e.style]?STYLES[e.style].icon:'ic-napo','ico'));
-    const meta=el('div','meta');meta.append(el('b',null,STYLES[e.style]?STYLES[e.style].name:'אפייה'),el('small',null,hhmm(d)));row.appendChild(meta);
+    if(e.thumb){const im=document.createElement('img');im.className='thumb';im.src=e.thumb;im.alt='';row.appendChild(im);}
+    else row.appendChild(useIcon(STYLES[e.style]?STYLES[e.style].icon:'ic-napo','ico'));
+    const meta=el('div','meta');meta.append(el('b',null,entryTitle(e)),el('small',null,hhmm(d)));row.appendChild(meta);
     if(e.rating){const bd=el('div','badge num'+(e.rating>=4?' hi':''));bd.append(document.createTextNode(String(e.rating)),el('small',null,'/5'));row.appendChild(bd);}
     card.appendChild(row);
     const tags=el('div','tags');
-    if(typeof e.stoneTemp==='number')tags.appendChild(el('span','tag','אבן '+e.stoneTemp+'°'));
+    if(e.dough)tags.appendChild(el('span','tag',e.dough));
+    if(typeof e.stoneTemp==='number')tags.appendChild(el('span','tag','אבן '+D(e.stoneTemp+'°')));
     if(e.seconds)tags.appendChild(el('span','tag',mmss(e.seconds)+' דקות'));
     if(e.rotations)tags.appendChild(el('span','tag',rotTxt(e.rotations)));
     if(e.base)tags.appendChild(el('span','tag '+e.base,'תחתית '+BASE[e.base]));
@@ -1298,7 +1589,9 @@ function renderLog(){
       clearTimeout(timer);del.disabled=true;
       try{await Journal.remove(e.id);toast('נמחק מהיומן');}catch(err){del.disabled=false;del.textContent='המחיקה נכשלה, נסה שוב';}
     });
-    card.appendChild(del);body.appendChild(card);
+    const act=el('div','eact'),cb=el('button','del share','כרטיס שיתוף');cb.type='button';
+    cb.addEventListener('click',()=>openCardSheet(e));act.append(cb,del);
+    card.appendChild(act);body.appendChild(card);
   }
 }
 
@@ -1323,6 +1616,531 @@ function renderChecklist(){
   count();
 }
 
+/* ---------- shared bits ---------- */
+const X_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+const heName=n=>/^[\u0590-\u05FF]/.test(n)?'ל'+n:'ל-'+n;
+function entryTitle(e){
+  if(e.pizza&&MENU[e.pizza])return MENU[e.pizza].name+(e.guest?' '+heName(e.guest):'');
+  return STYLES[e.style]?STYLES[e.style].name:'אפייה';
+}
+let lastFocus=null;
+function modal(title){
+  const o=$('#ovl'),b=$('#mbox');
+  if(o.hidden)lastFocus=document.activeElement;
+  b.textContent='';
+  b.appendChild(el('div','grab'));
+  const h=el('div','mhead'),t=el('h2',null,title);t.id='mtitle';
+  const x=el('button','x');x.type='button';x.setAttribute('aria-label','סגירה');x.innerHTML=X_ICON;x.addEventListener('click',closeModal);
+  h.append(t,x);b.appendChild(h);
+  o.hidden=false;document.body.style.overflow='hidden';
+  setTimeout(()=>{try{x.focus({preventScroll:true});}catch(e){}},50);
+  return b;
+}
+function closeModal(){
+  $('#ovl').hidden=true;document.body.style.overflow='';
+  if(cardURL){URL.revokeObjectURL(cardURL);cardURL=null;}
+  if(lastFocus&&lastFocus.focus){try{lastFocus.focus({preventScroll:true});}catch(e){}}
+}
+$('#ovl').addEventListener('click',e=>{if(e.target.id==='ovl')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#ovl').hidden)closeModal();});
+
+/* ---------- voice out ---------- */
+const Voice={
+  ok:'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window,
+  he:null,listed:false,primed:false,
+  load(){
+    if(!this.ok)return;
+    try{const vs=speechSynthesis.getVoices();if(vs.length){this.listed=true;this.he=vs.find(v=>/^(he|iw)/i.test(v.lang))||null;}}catch(e){}
+    renderVoiceNote();
+  },
+  prime(){
+    if(!this.ok||this.primed||!state.talk)return;
+    try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;u.lang='he-IL';speechSynthesis.speak(u);this.primed=true;}catch(e){}
+  },
+  say(text,urgent){
+    if(!state.talk||!this.ok||!text)return;
+    try{
+      if(urgent)speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);u.lang='he-IL';if(this.he)u.voice=this.he;u.rate=1.05;
+      u.onstart=()=>Ears.mute(true);u.onend=u.onerror=()=>Ears.mute(false);
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+};
+function renderVoiceNote(){
+  $('#talk-wrap').hidden=!Voice.ok;
+  if(Voice.ok&&Voice.listed&&!Voice.he)$('#talk-s').textContent='לא מצאתי במכשיר קול בעברית. ב-iPhone מוסיפים אותו בהגדרות, נגישות, תוכן מוקרא, קולות.';
+}
+
+/* ---------- voice in ---------- */
+const Rec=window.SpeechRecognition||window.webkitSpeechRecognition;
+const Ears={
+  ok:!!Rec,r:null,on:false,muted:false,muteUntil:0,last:0,fails:0,
+  mute(m){this.muted=m;if(!m)this.muteUntil=Date.now()+700;},
+  want(){return state.listen&&this.ok&&document.visibilityState==='visible'&&['ready','bake','after'].includes(bake.phase);},
+  sync(){if(this.want())this.start();else this.stop();},
+  start(){
+    if(this.on)return;
+    try{
+      const r=new Rec();r.lang='he-IL';r.continuous=true;r.interimResults=false;r.maxAlternatives=3;
+      r.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++){if(!e.results[i].isFinal)continue;const alts=[];for(let j=0;j<e.results[i].length;j++)alts.push(e.results[i][j].transcript);this.heard(alts.join(' '));}};
+      r.onerror=e=>{if(e.error==='not-allowed'||e.error==='service-not-allowed'){state.listen=false;save();$('#listen').checked=false;this.stop();toast('אין גישה למיקרופון. אפשר לאשר בהגדרות הדפדפן.');}};
+      r.onend=()=>{this.on=false;this.r=null;if(this.want()){this.fails++;setTimeout(()=>this.sync(),this.fails>6?5000:400);}};
+      r.start();this.r=r;this.on=true;
+    }catch(e){this.on=false;}
+  },
+  stop(){if(this.r){try{this.r.onend=null;this.r.abort();}catch(e){}}this.r=null;this.on=false;this.fails=0;},
+  heard(t){
+    const now=Date.now();
+    if(this.muted||now<this.muteUntil||now-this.last<2500)return;
+    this.fails=0;
+    const ph=bake.phase;
+    if(ph==='bake'&&/(יצא|הוצאתי|בחוץ|החוצה)/.test(t)){this.last=now;takeOut();toast('שמעתי: יצאה');}
+    else if((ph==='ready'||ph==='after')&&/(הכנסתי|נכנס|בפנים|פנימה)/.test(t)){this.last=now;launch();toast('שמעתי: הכנסתי');}
+  }
+};
+if(Voice.ok){Voice.load();try{speechSynthesis.addEventListener('voiceschanged',()=>Voice.load());}catch(e){}}
+$('#listen-wrap').hidden=!Ears.ok;
+$('#talk').checked=state.talk;$('#listen').checked=state.listen;
+$('#talk').addEventListener('change',e=>{
+  state.talk=e.target.checked;save();
+  if(state.talk){Voice.primed=false;ensureAudio();Voice.say('שלום! אני אגיד לך מתי לסובב ומתי להוציא.',true);}
+  else try{speechSynthesis.cancel();}catch(err){}
+});
+$('#listen').addEventListener('change',e=>{
+  state.listen=e.target.checked;save();
+  if(state.listen&&bake.phase==='idle')toast('הפקודות יעבדו כשהטאבון חם');
+  Ears.sync();
+});
+document.addEventListener('visibilitychange',()=>Ears.sync());
+
+/* ---------- party ---------- */
+const MENU={
+  marg:{name:'מרגריטה',color:'#D9472B',items:{sauce:80,mozz:90,basil:4,oil:5}},
+  mari:{name:'מרינרה',color:'#A82E1C',items:{sauce:90,garlic:1,oregano:0.25,oil:8}},
+  salami:{name:'סלמי',color:'#8E2630',items:{sauce:80,mozz:90,salami:35}},
+  mush:{name:'פטריות',color:'#8A6A4A',items:{sauce:70,mozz:90,mush:60}},
+  four:{name:'ארבע גבינות',color:'#E7C65A',items:{mozz:70,gorg:30,parm:15,oil:5}},
+  veg:{name:'ירקות',color:'#4F9A4A',items:{sauce:70,mozz:80,pepper:40,onion:25,olives:20}}
+};
+const SHOP={
+  sauce:{n:'עגבניות קלופות בקופסה',u:'g',x:g=>{const c=Math.ceil(g/400);return c===1?'קופסה אחת של 400 ג׳':c+' קופסאות של 400 ג׳';}},
+  mozz:{n:'מוצרלה טרייה',u:'g'},
+  gorg:{n:'גורגונזולה',u:'g'},
+  parm:{n:'פרמזן',u:'g'},
+  salami:{n:'סלמי פרוס דק',u:'g'},
+  mush:{n:'פטריות',u:'g'},
+  pepper:{n:'פלפל אדום',u:'g'},
+  onion:{n:'בצל סגול',u:'g'},
+  olives:{n:'זיתי קלמטה',u:'g'},
+  basil:{n:'בזיליקום',u:'leaf'},
+  garlic:{n:'שום',u:'clove'},
+  oregano:{n:'אורגנו מיובש',u:'tsp'},
+  oil:{n:'שמן זית לזילוף',u:'ml'}
+};
+const party=Object.assign({orders:[],spare:true,active:false,pick:'marg'},LS.get('tabun.party',{}));
+if(!MENU[party.pick])party.pick='marg';
+party.orders=(party.orders||[]).filter(o=>MENU[o.type]);
+function saveParty(){LS.set('tabun.party',party);}
+const curOrder=()=>party.orders.find(o=>!o.done)||null;
+const orderName=o=>MENU[o.type].name+(o.name?' '+heName(o.name):'');
+const partyBalls=()=>party.orders.length+(party.spare?1:0);
+function roundG(g){return g<100?Math.ceil(g/10)*10:Math.ceil(g/50)*50;}
+function fmtG(g){g=roundG(g);return g>=1000?(Math.round(g/50)*50/1000).toLocaleString('he-IL',{maximumFractionDigits:2})+' ק״ג':g+' ג׳';}
+function recipeFor(style,balls){
+  const ps=state.style,pb=state.per[style].balls;
+  state.style=style;state.per[style].balls=balls;
+  const r=recipe();
+  state.style=ps;state.per[style].balls=pb;return r;
+}
+function shopList(){
+  const n=party.orders.length,out=[];if(!n)return out;
+  const r=recipeFor('napo',partyBalls()),{k:fk,f:ff}=fl();
+  out.push({grp:'לבצק, '+partyBalls()+' כדורים'});
+  if(r.base>0.5)out.push({n:fk==='w00'?'קמח 00 לפיצה':'קמח 00 לפיצה',a:fmtG(r.base)});
+  if(r.special>0.5)out.push({n:ff.full,a:fmtG(r.special)});
+  if(r.sour)out.push({n:'מחמצת פעילה',a:grams(r.starter)+' ג׳',s:'מאכילים אותה כמה שעות לפני'});
+  else out.push({n:state.yeast==='dry'?'שמרים יבשים':'שמרים טריים',a:grams(r.yeast)+' ג׳'});
+  out.push({n:'סולת דקה',a:'150 ג׳',s:'לפיזור על המרדה'});
+  const tot={};
+  for(const o of party.orders){const it=MENU[o.type].items;for(const k in it)tot[k]=(tot[k]||0)+it[k];}
+  out.push({grp:'לתוספות'});
+  for(const k in SHOP){
+    if(!tot[k])continue;const d=SHOP[k],v=tot[k];let a,sub='';
+    if(d.u==='g'){a=fmtG(v);if(d.x)sub=d.x(v);}
+    else if(d.u==='leaf')a=Math.ceil(v)+' עלים';
+    else if(d.u==='clove'){const c=Math.ceil(v);a=c===1?'שן אחת':c+' שיניים';}
+    else if(d.u==='tsp'){const c=Math.max(1,Math.ceil(v));a=c===1?'כפית':c+' כפיות';}
+    else if(d.u==='ml')a=Math.ceil(v/5)*5+' מ״ל';
+    out.push({n:d.n,a,s:sub});
+  }
+  return out;
+}
+function shopText(){
+  const lines=['רשימת קניות לערב פיצה, '+party.orders.length+' פיצות'];
+  for(const r of shopList()){if(r.grp)lines.push('',r.grp+':');else lines.push('- '+r.n+': '+r.a+(r.s?' ('+r.s+')':''));}
+  const cnt={};for(const o of party.orders)cnt[o.type]=(cnt[o.type]||0)+1;
+  lines.push('','בתפריט: '+Object.keys(cnt).map(k=>MENU[k].name+(cnt[k]>1?' ×'+cnt[k]:'')).join(', '));
+  return lines.join('\n');
+}
+function renderParty(){
+  const menu=$('#menu');
+  if(!menu.childElementCount){
+    for(const k in MENU){
+      const b=el('button','mi');b.type='button';b.setAttribute('role','radio');b.dataset.v=k;
+      const i=el('i');i.style.background=MENU[k].color;b.append(i,document.createTextNode(MENU[k].name));
+      b.addEventListener('click',()=>{party.pick=k;saveParty();renderParty();});menu.appendChild(b);
+    }
+  }
+  $$('#menu .mi').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.v===party.pick)));
+  const ol=$('#orders'),n=party.orders.length,cur=party.active?curOrder():null;
+  ol.textContent='';ol.hidden=!n;$('#orders-empty').hidden=!!n;$('#partymore').hidden=!n;
+  party.orders.forEach((o,i)=>{
+    const li=el('li',o.done?'done':o===cur?'cur':'');
+    const no=el('span','no num',String(i+1));
+    const m=el('div');m.append(el('b',null,orderName(o)));
+    if(o.done)m.append(el('small',null,'יצאה ב-'+hhmm(new Date(o.at||Date.now()))));
+    else if(o===cur)m.append(el('small',null,'הבאה לטאבון'));
+    const x=el('button','x');x.type='button';x.innerHTML=X_ICON;x.setAttribute('aria-label','הסרה של '+orderName(o));
+    x.addEventListener('click',()=>{party.orders=party.orders.filter(q=>q!==o);if(!party.orders.length)party.active=false;saveParty();renderParty();renderQueue();});
+    li.append(no,m,x);ol.appendChild(li);
+  });
+  if(!n){renderQueue();return;}
+  const st=STYLES.napo,min=Math.round(n*(st.target+st.recover+60)/60);
+  const sum=$('#psum');sum.textContent='';
+  const stat=(label,val)=>{const c=el('div','card stat');c.append(el('small',null,label),el('span','num',val));return c;};
+  sum.append(stat('פיצות',String(n)),stat('כדורי בצק',String(partyBalls())),stat('דקות בטאבון','~'+min));
+  $('#spare').checked=party.spare;
+  const balls=partyBalls(),pd=$('#p-dough'),same=state.style==='napo'&&state.per.napo.balls===balls;
+  pd.textContent=same?'הבצק כבר מכוון ל-'+balls+' כדורים':'עדכון הבצק ל-'+balls+' כדורים';pd.disabled=same;
+  const ul=$('#shop');ul.textContent='';
+  for(const r of shopList()){
+    if(r.grp){ul.appendChild(el('li','grp',r.grp));continue;}
+    const li=el('li'),nm=el('div','nm');nm.append(el('b',null,r.n));if(r.s)nm.append(el('small',null,r.s));
+    li.append(nm,el('span','amt',r.a));ul.appendChild(li);
+  }
+  const left=party.orders.filter(o=>!o.done).length,ps=$('#p-start');
+  ps.hidden=!left;ps.textContent=party.active?'חזרה לטאבון':'מתחילים לאפות';
+  renderQueue();
+}
+function addOrder(){
+  const inp=$('#g-name'),name=inp.value.trim().slice(0,20);
+  party.orders.push({id:'o'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name,type:party.pick,done:false});
+  inp.value='';saveParty();renderParty();
+  toast(MENU[party.pick].name+(name?' '+heName(name):'')+' נוספה לתור');
+  try{inp.focus({preventScroll:true});}catch(e){}
+}
+$('#g-add').addEventListener('click',addOrder);
+$('#g-name').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addOrder();}});
+$('#spare').addEventListener('change',e=>{party.spare=e.target.checked;saveParty();renderParty();});
+$('#p-dough').addEventListener('click',()=>{
+  state.style='napo';state.per.napo.balls=partyBalls();save();
+  renderStyleCards();renderDough();paint();update();renderParty();
+  toast('הבצק עודכן ל-'+partyBalls()+' כדורים');
+});
+$('#p-wa').addEventListener('click',()=>{window.open('https://wa.me/?text='+encodeURIComponent(shopText()),'_blank');});
+$('#p-copy').addEventListener('click',async()=>{
+  const txt=shopText();
+  try{await navigator.clipboard.writeText(txt);toast('הרשימה הועתקה');}
+  catch(e){try{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();toast(ok?'הרשימה הועתקה':'לא הצלחתי להעתיק');}catch(e2){toast('לא הצלחתי להעתיק');}}
+});
+$('#p-start').addEventListener('click',()=>{
+  party.active=true;saveParty();
+  if(state.style!=='napo'){state.style='napo';save();renderStyleCards();renderDough();}
+  paint();update();renderParty();showTab('bake');
+});
+{
+  const b=$('#p-clear');let armed=false,timer=null;
+  b.addEventListener('click',()=>{
+    if(!armed){armed=true;b.classList.add('confirm');b.textContent='לנקות את כל התור? לחץ שוב';timer=setTimeout(()=>{armed=false;b.classList.remove('confirm');b.textContent='ניקוי התור';},3000);return;}
+    clearTimeout(timer);armed=false;b.classList.remove('confirm');b.textContent='ניקוי התור';
+    party.orders=[];party.active=false;saveParty();renderParty();toast('התור נוקה');
+  });
+}
+function renderQueue(){
+  const q=$('#qcard'),n=party.orders.length;
+  if(!party.active||!n){q.hidden=true;return;}
+  q.hidden=false;q.textContent='';
+  const cur=curOrder(),idx=cur?party.orders.indexOf(cur):-1;
+  const qn=el('div','qn num');
+  if(cur)qn.textContent=String(idx+1);
+  else qn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const m=el('div','qm');
+  if(cur){
+    m.append(el('small',null,'פיצה '+(idx+1)+' מתוך '+n),el('b',null,orderName(cur)));
+    const nx=party.orders.slice(idx+1).find(o=>!o.done);
+    if(nx)m.append(el('span','qnext','אחריה: '+orderName(nx)));
+  }else m.append(el('small',null,n+' מתוך '+n),el('b',null,'כל הפיצות יצאו'));
+  const dots=el('div','qdots');dots.setAttribute('aria-hidden','true');
+  party.orders.forEach(o=>dots.appendChild(el('i',o.done?'d':o===cur?'c':'')));
+  m.appendChild(dots);
+  q.append(qn,m);
+  if(cur&&party.orders.filter(o=>!o.done).length>1&&bake.phase!=='bake'){
+    const sk=el('button','ghostbtn','דלג');sk.type='button';sk.setAttribute('aria-label','להעביר את '+orderName(cur)+' לסוף התור');
+    sk.addEventListener('click',()=>{party.orders.splice(idx,1);party.orders.push(cur);saveParty();renderParty();paint();});
+    q.appendChild(sk);
+  }else if(!cur){
+    const fin=el('button','ghostbtn','סיום הערב');fin.type='button';
+    fin.addEventListener('click',()=>{party.active=false;saveParty();renderParty();paint();toast('ערב מוצלח!');});
+    q.appendChild(fin);
+  }
+}
+
+/* ---------- heat map ---------- */
+const HPOS=[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]];
+const HNAME=['מאחור משמאל','מאחור באמצע','מאחור מימין','בצד שמאל','במרכז','בצד ימין','מקדימה משמאל','מקדימה באמצע','מקדימה מימין'];
+const HORDER=[4,0,1,2,5,8,7,6,3];
+const HPAL=[[0,[27,12,65]],[.28,[122,29,108]],[.52,[212,56,43]],[.76,[249,142,9]],[1,[252,243,166]]];
+let heat=LS.get('tabun.heat',[]);
+if(!Array.isArray(heat))heat=[];
+function heatField(){
+  if(!heat.length)return null;
+  if(state.heatView==='last'||heat.length===1)return {v:heat[0].v.slice(),n:1,ts:heat[0].ts};
+  const sums=Array(9).fill(0),cnt=Array(9).fill(0);let cs=0,cn=0;
+  for(const h of heat){const c=h.v[4];if(typeof c!=='number')continue;cs+=c;cn++;for(let i=0;i<9;i++)if(typeof h.v[i]==='number'){sums[i]+=h.v[i]-c;cnt[i]++;}}
+  if(!cn)return null;
+  const cAvg=cs/cn;
+  return {v:sums.map((x,i)=>cnt[i]?Math.round(cAvg+x/cnt[i]):null),n:cn,ts:heat[0].ts};
+}
+function palette(f){
+  f=Math.max(0,Math.min(1,f));
+  for(let i=1;i<HPAL.length;i++){if(f<=HPAL[i][0]){const [a,ca]=HPAL[i-1],[b,cb]=HPAL[i],k=(f-a)/(b-a);return ca.map((v,j)=>Math.round(v+(cb[j]-v)*k));}}
+  return HPAL[HPAL.length-1][1];
+}
+function heatImage(v,lo,hi){
+  const N=72,c=document.createElement('canvas');c.width=c.height=N;
+  const g=c.getContext('2d'),im=g.createImageData(N,N),pts=[];
+  v.forEach((t,i)=>{if(typeof t==='number')pts.push([(HPOS[i][1]+.5)/3,(HPOS[i][0]+.5)/3,t]);});
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const px=(x+.5)/N,py=(y+.5)/N;let ws=0,ts=0;
+    for(const [qx,qy,t] of pts){const d2=(px-qx)*(px-qx)+(py-qy)*(py-qy)+1e-4;const w=1/(d2*Math.sqrt(d2));ws+=w;ts+=w*t;}
+    const col=palette((ts/ws-lo)/(hi-lo)),o=(y*N+x)*4;
+    im.data[o]=col[0];im.data[o+1]=col[1];im.data[o+2]=col[2];im.data[o+3]=255;
+  }
+  g.putImageData(im,0,0);return c.toDataURL();
+}
+let hmSeq=0;
+function ovenTop(img,labels){
+  const id='hmc'+(++hmSeq);
+  const s=svgEl('svg',{viewBox:'0 0 360 380',role:'img','aria-label':'הטאבון במבט מלמעלה: המבער בצד שמאל ובגב, הפתח למטה'});
+  const defs=svgEl('defs',{}),cp=svgEl('clipPath',{id});cp.appendChild(svgEl('rect',{x:62,y:62,width:236,height:236,rx:10}));defs.appendChild(cp);s.appendChild(defs);
+  s.appendChild(svgEl('rect',{x:16,y:16,width:328,height:328,rx:32,fill:'url(#gOven)'}));
+  s.appendChild(svgEl('rect',{x:30,y:30,width:300,height:300,rx:22,fill:'#0B0908'}));
+  s.appendChild(svgEl('rect',{x:62,y:62,width:236,height:236,rx:10,fill:'url(#gStone)'}));
+  if(img){const im=svgEl('image',{x:62,y:62,width:236,height:236,preserveAspectRatio:'none','clip-path':'url(#'+id+')'});im.setAttribute('href',img);s.appendChild(im);}
+  const gl=svgEl('g',{class:'flames left low',filter:'url(#fGlow)'}),gb=svgEl('g',{class:'flames back low',filter:'url(#fGlow)'});
+  for(let i=0;i<10;i++){const c=74+i*23.5;
+    gl.appendChild(svgEl('path',{d:'M34 '+(c-8)+'C46 '+(c-8)+' 58 '+(c-3)+' 72 '+c+'C58 '+(c+3)+' 46 '+(c+8)+' 34 '+(c+8)+'Z'}));
+    gb.appendChild(svgEl('path',{d:'M'+(c-8)+' 34C'+(c-8)+' 46 '+(c-3)+' 58 '+c+' 72C'+(c+3)+' 58 '+(c+8)+' 46 '+(c+8)+' 34Z'}));}
+  s.append(gl,gb);
+  s.appendChild(svgEl('rect',{x:104,y:326,width:152,height:10,rx:5,fill:'#0B0908'}));
+  const lb=svgEl('text',{x:180,y:374,'text-anchor':'middle',class:'dial-label'});lb.textContent='פתח';s.appendChild(lb);
+  if(labels)labels.forEach((t,i)=>{
+    if(typeof t!=='number')return;
+    const [r,c]=HPOS[i];
+    const tx=svgEl('text',{x:62+236*(c+.5)/3,y:62+236*(r+.5)/3+6,'text-anchor':'middle','font-size':i===4?21:17,'font-weight':800,fill:'#fff',stroke:'rgba(0,0,0,.55)','stroke-width':4,'paint-order':'stroke',style:'font-family:"Bricolage Grotesque",Assistant,sans-serif'});
+    tx.textContent=t+'°';s.appendChild(tx);
+  });
+  return s;
+}
+function heatInsights(v){
+  const c=v[4];if(typeof c!=='number')return [];
+  let hi=-1,lo=-1;
+  v.forEach((t,i)=>{if(i===4||typeof t!=='number')return;if(hi<0||t>v[hi])hi=i;if(lo<0||t<v[lo])lo=i;});
+  if(hi<0)return [];
+  const out=[],sg=d=>(d>0?'+':d<0?'−':'')+Math.abs(d);
+  out.push('הכי חם '+HNAME[hi]+' ('+D(sg(v[hi]-c)+'°')+' מהמרכז), הכי קר '+HNAME[lo]+' ('+D(sg(v[lo]-c)+'°')+').');
+  const vals=v.filter(t=>typeof t==='number'),spread=Math.max(...vals)-Math.min(...vals);
+  if(spread>=90)out.push('הפרש של '+D(spread+'°')+' על האבן. מכניסים את הפיצה קצת ימינה וקדימה מהמרכז, ומסובבים כל 15 שניות במקום 20.');
+  else if(spread>=50)out.push('הפרש של '+D(spread+'°')+'. הסיבובים הרגילים, כל 20 שניות, מאזנים את זה.');
+  else out.push('החום אחיד יחסית, הפרש של '+D(spread+'°')+' בלבד. האבן והמבער במצב טוב.');
+  const avg=ix=>{const a=ix.map(i=>v[i]).filter(t=>typeof t==='number');return a.length?a.reduce((x,y)=>x+y,0)/a.length:null;};
+  const L=avg([0,3,6]),R=avg([2,5,8]),F=avg([6,7,8]);
+  if(L!=null&&R!=null&&L-R>=40)out.push('צד המבער חם ב-'+D(Math.round(L-R)+'°')+' מהצד השני. כשהשוליים משמאל משחימים, סובב מיד בלי לחכות לצפצוף.');
+  if(F!=null&&c-F>=60)out.push('החזית קרה. אחרי כל פיצה תן לאבן להתאושש על אש מלאה, ואל תשאיר את הפיצה קרוב לפתח.');
+  return out;
+}
+function renderHeat(){
+  const sec=$('#heatsec');sec.textContent='';
+  sec.appendChild(el('h2','h2','מפת החום של הטאבון'));
+  const card=el('div','card hmcard');sec.appendChild(card);
+  const f=heatField();
+  if(!f){
+    const w=el('div','hmwrap');w.appendChild(ovenTop(null,null));card.appendChild(w);
+    card.appendChild(el('p','hmtxt','כשהטאבון חם, מודדים באקדח 9 נקודות על האבן. אחרי כמה מדידות רואים איפה החום מתרכז בטאבון שלך ואיך להכניס את הפיצה.'));
+    const b=el('button','btn','מדידה ראשונה');b.type='button';b.addEventListener('click',openHeatSheet);card.appendChild(b);
+    return;
+  }
+  if(heat.length>1){const sg=el('div');sg.setAttribute('role','radiogroup');sg.setAttribute('aria-label','מה להציג');card.appendChild(sg);
+    seg(sg,[['avg','ממוצע של '+heat.length+' מדידות'],['last','המדידה האחרונה']],state.heatView,v=>{state.heatView=v;save();renderHeat();});}
+  const vals=f.v.filter(t=>typeof t==='number'),lo=Math.min(...vals)-15,hi=Math.max(...vals)+15;
+  const w=el('div','hmwrap');w.appendChild(ovenTop(heatImage(f.v,lo,hi),f.v));card.appendChild(w);
+  const lg=el('div','hmleg');lg.dir='ltr';lg.setAttribute('aria-hidden','true');
+  lg.append(el('span',null,Math.round(lo+15)+'°'),el('i'),el('span',null,Math.round(hi-15)+'°'));card.appendChild(lg);
+  const d=new Date(f.ts);
+  card.appendChild(el('p','hmmeta',f.n>1?'הצבעים מראים את ההפרש מהמרכז, בממוצע':'נמדד '+dayLabel(d)+' ב-'+hhmm(d)));
+  const ins=heatInsights(f.v);
+  if(ins.length){const box=el('div','insight');for(const t of ins)box.appendChild(el('p',null,t));card.appendChild(box);}
+  const b=el('button','btn ghost','מדידה חדשה');b.type='button';b.addEventListener('click',openHeatSheet);card.appendChild(b);
+  const del=el('button','del','מחיקת המדידה האחרונה');del.type='button';let armed=false,timer=null;
+  del.addEventListener('click',()=>{
+    if(!armed){armed=true;del.classList.add('confirm');del.textContent='למחוק? לחץ שוב';timer=setTimeout(()=>{armed=false;del.classList.remove('confirm');del.textContent='מחיקת המדידה האחרונה';},3000);return;}
+    clearTimeout(timer);heat.shift();LS.set('tabun.heat',heat);renderHeat();toast('המדידה נמחקה');
+  });
+  const p=el('p');p.style.cssText='text-align:center;margin:6px 0 0';p.appendChild(del);card.appendChild(p);
+}
+function openHeatSheet(){
+  const box=modal('מדידת חום על האבן');
+  box.appendChild(el('p','desc','מכוונים את האקדח לכל נקודה ומקלידים. מתחילים מהמרכז, ואפשר לדלג על נקודות.'));
+  const w=el('div','hmwrap');w.appendChild(ovenTop(null,null));
+  const grid=el('div','hmgrid'),inputs=[];
+  HPOS.forEach((p,i)=>{
+    const inp=document.createElement('input');inp.type='number';inp.inputMode='numeric';inp.min='100';inp.max='650';
+    inp.placeholder=i===4?'מרכז':'°';inp.setAttribute('aria-label',HNAME[i]);if(i===4)inp.className='c';
+    inputs.push(inp);grid.appendChild(inp);
+  });
+  if(typeof bake.stoneTemp==='number'&&bake.phase!=='idle')inputs[4].value=bake.stoneTemp;
+  HORDER.forEach((i,k)=>{inputs[i].enterKeyHint=k<8?'next':'done';inputs[i].addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(k<8)inputs[HORDER[k+1]].focus();else go.click();}});});
+  w.appendChild(grid);box.appendChild(w);
+  const err=el('p','fb bad');err.setAttribute('aria-live','polite');box.appendChild(err);
+  const go=el('button','btn','שמירת המדידה');go.type='button';box.appendChild(go);
+  go.addEventListener('click',()=>{
+    const v=inputs.map(x=>{const n=parseInt(x.value,10);return n>=100&&n<=650?n:null;});
+    if(v[4]==null){err.textContent='חסר המרכז. כל המפה נמדדת ביחס אליו.';inputs[4].focus();return;}
+    if(v.filter(x=>x!=null).length<3){err.textContent='צריך את המרכז ועוד לפחות שתי נקודות.';return;}
+    heat.unshift({id:'h'+Date.now().toString(36),ts:Date.now(),v});heat=heat.slice(0,30);LS.set('tabun.heat',heat);
+    closeModal();renderHeat();toast(state.tab==='log'?'המדידה נשמרה':'המדידה נשמרה. המפה בלשונית יומן');
+  });
+  setTimeout(()=>{try{inputs[inputs[4].value?0:4].focus({preventScroll:true});}catch(e){}},350);
+}
+$('#heatgo').addEventListener('click',openHeatSheet);
+
+/* ---------- share card ---------- */
+let cardEntry=null,cardURL=null;
+function openCardSheet(e){
+  cardEntry=e;
+  const box=modal('כרטיס שיתוף');
+  box.appendChild(el('p','desc','תמונה של הפיצה עם הנתונים של האפייה, מוכנה לשליחה.'));
+  const b1=el('button','btn','צילום או בחירת תמונה');b1.type='button';
+  b1.addEventListener('click',()=>{const p=$('#photo');p.value='';p.click();});
+  const b2=el('button','btn ghost','בלי תמונה, עם איור');b2.type='button';b2.addEventListener('click',()=>buildCard(null));
+  box.append(b1,b2);
+}
+function loadImg(file){return new Promise(res=>{const u=URL.createObjectURL(file),i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=u;});}
+function coverDraw(g,img,x,y,w,h){
+  const iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height,s=Math.max(w/iw,h/ih),dw=iw*s,dh=ih*s;
+  g.save();g.beginPath();g.rect(x,y,w,h);g.clip();g.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh);g.restore();
+}
+function saveThumb(img){
+  if(!cardEntry)return;
+  try{
+    const c=document.createElement('canvas');c.width=c.height=200;coverDraw(c.getContext('2d'),img,0,0,200,200);
+    cardEntry.thumb=c.toDataURL('image/jpeg',.72);
+    if(cardEntry===bake.entry)queuePut(bake.entry);else Journal.put(cardEntry).catch(()=>{});
+  }catch(e){}
+}
+$('#photo').addEventListener('change',async e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  const img=await loadImg(f);
+  if(!img){toast('לא הצלחתי לפתוח את התמונה. נסה תמונה אחרת.');return;}
+  saveThumb(img);buildCard(img);
+});
+function drawPizza(g,cx,cy,r,pita){
+  let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  g.save();g.shadowColor='rgba(0,0,0,.55)';g.shadowBlur=70;g.shadowOffsetY=30;
+  let gr=g.createRadialGradient(cx-r*.25,cy-r*.3,r*.15,cx,cy,r);
+  gr.addColorStop(0,pita?'#F6D8A4':'#F2C27E');gr.addColorStop(.75,pita?'#E2A866':'#D9944A');gr.addColorStop(1,pita?'#B97837':'#A8612A');
+  g.fillStyle=gr;g.beginPath();g.arc(cx,cy,pita?r*.75:r,0,Math.PI*2);g.fill();g.restore();
+  if(pita){
+    g.fillStyle='rgba(255,255,255,.28)';g.beginPath();g.ellipse(cx-r*.18,cy-r*.22,r*.3,r*.15,0,0,Math.PI*2);g.fill();
+    for(let i=0;i<14;i++){const a=rnd()*Math.PI*2,d=rnd()*r*.6;g.fillStyle='rgba(110,64,30,'+(.35+rnd()*.3)+')';g.beginPath();g.arc(cx+Math.cos(a)*d,cy+Math.sin(a)*d,r*(.012+rnd()*.025),0,Math.PI*2);g.fill();}
+    return;
+  }
+  for(let i=0;i<80;i++){const a=rnd()*Math.PI*2,d=r*(.83+rnd()*.15);g.fillStyle='rgba(40,22,12,'+(.4+rnd()*.5)+')';g.beginPath();g.arc(cx+Math.cos(a)*d,cy+Math.sin(a)*d,r*(.01+rnd()*.03),0,Math.PI*2);g.fill();}
+  gr=g.createRadialGradient(cx,cy,r*.1,cx,cy,r*.8);gr.addColorStop(0,'#DA4A2C');gr.addColorStop(1,'#A62B19');
+  g.fillStyle=gr;g.beginPath();g.arc(cx,cy,r*.79,0,Math.PI*2);g.fill();
+  const blobs=[[-.3,-.25,.17],[.28,-.15,.14],[-.1,.3,.18],[.36,.33,.12],[-.48,.16,.11],[.08,-.46,.1],[.02,.02,.09]];
+  for(const [bx,by,br] of blobs){
+    const x=cx+bx*r,y=cy+by*r,rr=br*r;
+    const cg=g.createRadialGradient(x-rr*.3,y-rr*.3,rr*.1,x,y,rr);cg.addColorStop(0,'#FFFDF5');cg.addColorStop(.7,'#F6E9C9');cg.addColorStop(1,'#E2C68F');
+    g.fillStyle=cg;g.beginPath();g.arc(x,y,rr,0,Math.PI*2);g.fill();
+    g.fillStyle='rgba(176,110,50,.35)';g.beginPath();g.arc(x+rr*.35,y+rr*.2,rr*.18,0,Math.PI*2);g.fill();
+  }
+  const leaves=[[0,-.6,-.5,.13],[.17,.12,.7,.1],[-.36,-.02,-1.2,.09],[.45,-.42,.3,.08]];
+  for(const [lx,ly,rot,ls] of leaves){
+    g.save();g.translate(cx+lx*r,cy+ly*r);g.rotate(rot);
+    g.fillStyle='#2F8A4C';g.beginPath();g.moveTo(0,-ls*r);g.bezierCurveTo(ls*r*.62,-ls*r*.6,ls*r*.62,ls*r*.6,0,ls*r);g.bezierCurveTo(-ls*r*.62,ls*r*.6,-ls*r*.62,-ls*r*.6,0,-ls*r);g.fill();
+    g.strokeStyle='#1F5E33';g.lineWidth=r*.008;g.beginPath();g.moveTo(0,-ls*r*.8);g.lineTo(0,ls*r*.8);g.stroke();g.restore();
+  }
+}
+function fitFont(g,txt,weight,size,family,maxW){let s=size;g.font=weight+' '+s+'px '+family;while(g.measureText(txt).width>maxW&&s>20){s-=3;g.font=weight+' '+s+'px '+family;}return s;}
+function drawCard(img,e){
+  const W=1080,H=1350,PH=880,c=document.createElement('canvas');c.width=W;c.height=H;
+  const g=c.getContext('2d'),SANS='Assistant,"Arial Hebrew",Arial,sans-serif',NUM='"Bricolage Grotesque",Assistant,Arial,sans-serif';
+  g.fillStyle='#140F0C';g.fillRect(0,0,W,H);
+  if(img)coverDraw(g,img,0,0,W,PH+40);
+  else{
+    const rg=g.createRadialGradient(W/2,PH*.52,40,W/2,PH*.52,700);rg.addColorStop(0,'#7A2A12');rg.addColorStop(.55,'#2A140B');rg.addColorStop(1,'#140F0C');
+    g.fillStyle=rg;g.fillRect(0,0,W,PH+40);
+    drawPizza(g,W/2,PH*.5,320,e.style==='pita');
+  }
+  const fg=g.createLinearGradient(0,PH-300,0,PH+40);fg.addColorStop(0,'rgba(20,15,12,0)');fg.addColorStop(1,'rgba(20,15,12,1)');
+  g.fillStyle=fg;g.fillRect(0,PH-300,W,340);
+  g.fillStyle='#140F0C';g.fillRect(0,PH+40,W,H-PH-40);
+  const eg=g.createRadialGradient(W*.12,H+120,10,W*.12,H+120,760);eg.addColorStop(0,'rgba(240,87,30,.42)');eg.addColorStop(1,'rgba(240,87,30,0)');
+  g.fillStyle=eg;g.fillRect(0,0,W,H);
+  const M=72,XR=W-M;
+  g.direction='rtl';g.textAlign='right';g.textBaseline='alphabetic';
+  const title=e.pizza&&MENU[e.pizza]?entryTitle(e):(e.style==='pita'?'פיתות מהטאבון':'פיצה '+(STYLES[e.style]?STYLES[e.style].name:''));
+  g.fillStyle='#F7F0E8';fitFont(g,title,800,84,SANS,W-2*M);g.fillText(title,XR,PH+70);
+  const subP=[];if(e.dough)subP.push(e.dough);if(e.plan)subP.push(e.plan+' שעות במקרר');else if(e.plan===0)subP.push('בצק של אותו יום');
+  if(subP.length){g.fillStyle='#B3A495';fitFont(g,subP.join(', '),600,38,SANS,W-2*M);g.fillText(subP.join(', '),XR,PH+128);}
+  const stats=[];
+  if(typeof e.stoneTemp==='number')stats.push([e.stoneTemp+'°','חום האבן']);
+  if(e.seconds)stats.push([mmss(e.seconds),'דקות בטאבון']);
+  if(e.rotations)stats.push([String(e.rotations),'סיבובים']);
+  if(e.rating)stats.push([e.rating+'/5','דירוג',1]);
+  if(stats.length){
+    const colW=(W-2*M)/stats.length,ys=PH+(subP.length?262:220);
+    stats.forEach(([v,l,hot],i)=>{
+      const xr=XR-i*colW;
+      g.direction='ltr';g.textAlign='right';g.fillStyle=hot?'#FF8A3D':'#F7F0E8';fitFont(g,v,700,108,NUM,colW-24);
+      const vw=g.measureText(v).width;g.textAlign='left';g.fillText(v,xr-vw,ys);
+      g.direction='rtl';g.textAlign='right';g.fillStyle='#A8998B';g.font='700 32px '+SANS;g.fillText(l,xr,ys+50);
+    });
+  }
+  g.fillStyle='rgba(255,236,214,.12)';g.fillRect(M,H-138,W-2*M,2);
+  const lx=XR-60,ly=H-106;
+  const lg=g.createLinearGradient(lx,ly,lx+60,ly+60);lg.addColorStop(0,'#E39A16');lg.addColorStop(.5,'#F0571E');lg.addColorStop(1,'#C4301B');
+  g.fillStyle=lg;g.beginPath();if(g.roundRect)g.roundRect(lx,ly,60,60,18);else g.rect(lx,ly,60,60);g.fill();
+  try{g.save();g.translate(lx+12,ly+12);g.scale(1.5,1.5);g.fillStyle='#1B0E07';g.fill(new Path2D('M12 2.5c.7 3.4 5.2 5.6 5.2 11a5.2 5.2 0 0 1-10.4 0c0-2.3 1.2-3.8 2.3-4.6.2 1.8 1.1 3 2.3 3.2-.4-3.3-.6-6.6.6-9.6Z'));g.restore();}catch(err){}
+  g.direction='rtl';g.textAlign='right';g.fillStyle='#F7F0E8';g.font='800 40px '+SANS;g.fillText('הטאבון',lx-18,ly+30);
+  g.fillStyle='#A8998B';g.font='600 28px '+SANS;g.direction='ltr';g.textAlign='right';g.fillText('Ooni Koda 16',lx-18,ly+64);
+  const d=new Date(e.ts||Date.now());
+  g.direction='ltr';g.textAlign='left';g.fillStyle='#A8998B';g.font='700 34px '+NUM;g.fillText(d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear(),M,ly+46);
+  return c;
+}
+async function buildCard(img){
+  const box=modal('כרטיס שיתוף'),st=el('p','desc','מכין את הכרטיס...');box.appendChild(st);
+  try{if(document.fonts&&document.fonts.load)await Promise.race([Promise.all([document.fonts.load('800 80px Assistant'),document.fonts.load('600 38px Assistant'),document.fonts.load('700 100px "Bricolage Grotesque"')]),new Promise(r=>setTimeout(r,1500))]);}catch(e){}
+  const e=cardEntry||{ts:Date.now(),style:state.style};
+  const c=drawCard(img,e);
+  const blob=await new Promise(r=>{try{c.toBlob(r,'image/jpeg',.9);}catch(err){r(null);}});
+  if(!blob){st.textContent='לא הצלחתי ליצור את התמונה בדפדפן הזה.';return;}
+  if(cardURL)URL.revokeObjectURL(cardURL);
+  cardURL=URL.createObjectURL(blob);st.remove();
+  const prev=el('div','cardprev'),im=document.createElement('img');im.src=cardURL;im.alt='כרטיס השיתוף: '+entryTitle(e);prev.appendChild(im);box.appendChild(prev);
+  const row=el('div','btnrow'),fname='pizza-'+new Date(e.ts||Date.now()).toISOString().slice(0,10)+'.jpg';
+  let file=null;try{file=new File([blob],fname,{type:'image/jpeg'});}catch(err){}
+  if(file&&navigator.canShare&&navigator.canShare({files:[file]})){
+    const sb=el('button','btn','שיתוף');sb.type='button';sb.addEventListener('click',()=>{navigator.share({files:[file]}).catch(()=>{});});row.appendChild(sb);
+  }
+  const a=el('a','btn ghost','שמירת התמונה');a.href=cardURL;a.download=fname;row.appendChild(a);
+  box.appendChild(row);
+  box.appendChild(el('p','desc','אפשר גם ללחוץ לחיצה ארוכה על התמונה ולשמור אותה.'));
+}
+$('#f-card').addEventListener('click',()=>{if(!bake.entry)return;if(bake.form.rating)bake.entry.rating=bake.form.rating;openCardSheet(bake.entry);});
+
 /* ---------- tabs ---------- */
 function showTab(t){
   state.tab=t;save();
@@ -1335,7 +2153,7 @@ $$('.dock button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.t
 
 /* ---------- boot ---------- */
 if(!state.eat||state.eat<Date.now())state.eat=defaultEat();
-renderStyleCards();renderDough();renderForm();renderChecklist();renderLog();
+renderStyleCards();renderDough();renderForm();renderChecklist();renderLog();renderParty();renderHeat();
 paint();update();showTab(state.tab);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(placeAll);
 setInterval(()=>{if(state.tab==='dough')renderWhen();},30000);
