@@ -172,6 +172,11 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 .ing .g{display:flex;align-items:baseline;gap:4px}
 .ing .g .num{font-size:1.95rem;line-height:1}
 .ing .g small{color:var(--muted);font-weight:600}
+.prebox{margin:2px 0 12px;padding:12px 14px;border-radius:18px;background:var(--card-2)}
+.prebox b{display:block;font-weight:800}
+.prebox .pg{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:6px;font-weight:700}
+.prebox .pg small{color:var(--muted);font-weight:600}
+.prebox p{margin:6px 0 0;color:var(--muted);font-size:.86rem}
 
 /* when */
 .days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin:14px -2px 0;scrollbar-width:none;scroll-snap-type:x proximity}
@@ -208,6 +213,10 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 .tl li.done .c::before{background:var(--basil);border-color:var(--basil)}
 .tl h3{margin:0;font-size:1.02rem;font-weight:800}
 .tl p{margin:2px 0 0;color:var(--muted);font-size:.92rem}
+.btn.ghost svg{width:20px;height:20px}
+.calnote{margin:10px 2px 0;color:var(--muted);font-size:.92rem}
+.calsub{color:var(--muted);font-weight:800;font-size:.85rem;margin:18px 2px 6px}
+.shop .amt a.ghostbtn{text-decoration:none;color:inherit}
 
 /* bake */
 .bakehead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
@@ -567,6 +576,7 @@ a.btn{text-decoration:none}
       </div>
       <div class="bar" id="bar" aria-hidden="true"></div>
       <ul class="ing" id="ing"></ul>
+      <div class="prebox" id="prebox" hidden></div>
     </section>
 
     <h2 class="h2">מתי אוכלים?</h2>
@@ -574,6 +584,10 @@ a.btn{text-decoration:none}
     <div id="fastwrap" style="margin-top:10px" hidden><div id="fasth" role="radiogroup" aria-label="כמה זמן יש עד האוכל"></div></div>
     <p class="desc" id="plan-d"></p>
     <p class="desc warnline" id="plan-w" hidden></p>
+    <div id="prefwrap" style="margin-top:12px">
+      <div id="pref" role="radiogroup" aria-label="שיטת הבצק"></div>
+      <p class="desc" id="pref-d"></p>
+    </div>
     <div id="roomwrap" style="margin-top:12px">
       <div id="room" role="radiogroup" aria-label="הטמפרטורה בבית"></div>
       <p class="desc" id="room-d"></p>
@@ -590,6 +604,7 @@ a.btn{text-decoration:none}
       <div><small>השלב הבא</small><b id="next-t"></b><span id="next-w"></span></div>
     </div>
     <ol class="tl" id="timeline"></ol>
+    <button type="button" class="btn ghost" id="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>תזכורות ללוח השנה</button>
   </section>
 
   <!-- PARTY -->
@@ -818,6 +833,14 @@ const FLOURS={
   ww:{name:'חיטה מלאה',full:'קמח חיטה מלא',short:'חיטה מלאה',the:'החיטה המלאה',desc:'טעם עמוק, צריך יותר מים',hyd:10,speed:0.75,color:'#9C7048',def:30,maxCold:[[70,48]],
     tip:'קמח מלא סופג יותר מים, אז ההידרציה עולה אוטומטית. מעל 50% השוליים יהיו פחות אווריריים.'}
 };
+/* pre-ferment: share = % of the flour, hyd = its hydration, idy = instant yeast % of its flour at normal room temp, cut = yeast factor for the final dough */
+const PREF={
+  direct:{name:'ישיר',desc:'כל החומרים נלושים יחד בשלב אחד. הכי פשוט.'},
+  poolish:{name:'פוליש',the:'הפוליש',share:30,hyd:100,idy:0.1,hours:12,range:[9,18],cut:0.5,
+    desc:'מחמצה רכה של קמח ומים במשקל שווה, שתוססת 12 שעות על השיש לפני הלישה. בצק נמתח, שוליים אווריריים וארומה עדינה.'},
+  biga:{name:'ביגה',the:'הביגה',share:50,hyd:50,idy:0.2,hours:16,range:[12,24],cut:0.5,
+    desc:'מחמצה קשה ויבשה (50% מים) שתוססת 16 שעות במקום קריר. טעם עמוק, בצק חזק ושוליים תפוחים מאוד.'}
+};
 const SOUR={same:20,c24:15,c48:10,c72:7};
 const FAST_IDY={2:1.1,3:0.65,4:0.42,5:0.3};
 const FAST_BALLS={2:60,3:75,4:90,5:120};
@@ -832,7 +855,9 @@ const PRESETS=[
   {id:'sour',name:'מחמצת',meta:'קמח 00, 48 ש׳',flour:'w00',yeast:'sour',plan:'c48',hyd:64},
   {id:'spelt',name:'כוסמין',meta:'50% כוסמין, 24 ש׳',flour:'spelt',share:50,yeast:'dry',plan:'c24',hyd:63},
   {id:'wspelt',name:'כוסמין מלא ומחמצת',meta:'30%, 24 ש׳',flour:'wspelt',share:30,yeast:'sour',plan:'c24',hyd:63},
-  {id:'ww',name:'חיטה מלאה',meta:'30% מלא, 48 ש׳',flour:'ww',share:30,yeast:'dry',plan:'c48',hyd:63}
+  {id:'ww',name:'חיטה מלאה',meta:'30% מלא, 48 ש׳',flour:'ww',share:30,yeast:'dry',plan:'c48',hyd:63},
+  {id:'poolish',name:'פוליש',meta:'12 ש׳ + 24 ש׳ במקרר',flour:'w00',yeast:'dry',plan:'c24',pref:'poolish',hyd:65},
+  {id:'biga',name:'ביגה',meta:'16 ש׳ + 24 ש׳ במקרר',flour:'w00',yeast:'dry',plan:'c24',pref:'biga',hyd:65}
 ];
 const ROOM={cool:{name:'בית קריר',f:1.4,desc:'עד '+D('22°')+' בבית. מוסיפים קצת שמרים.'},normal:{name:'רגיל',f:1,desc:D('23-26°')+' בבית.'},hot:{name:'בית חם',f:0.6,desc:D('27°')+' ומעלה. מורידים שמרים ומשתמשים במים קרים.'}};
 const PREHEAT=25*60;
@@ -849,6 +874,8 @@ const state={
   fastH:[2,3,4,5].includes(saved.fastH)?saved.fastH:3,
   room:ROOM[saved.room]?saved.room:'normal',
   yeast:['dry','fresh','sour'].includes(saved.yeast)?saved.yeast:'dry',
+  pref:PREF[saved.pref]?saved.pref:'direct',
+  calLead:[0,10,30].includes(saved.calLead)?saved.calLead:0,
   flour:FLOURS[saved.flour]?saved.flour:'w00',
   share:Object.assign({spelt:50,wspelt:30,ww:30},saved.share||{}),
   sound:saved.sound!==false,
@@ -859,7 +886,7 @@ const state={
   eat:typeof saved.eat==='number'?saved.eat:null,
   per
 };
-function save(){LS.set('tabun.settings',{style:state.style,plan:state.plan,fastH:state.fastH,room:state.room,yeast:state.yeast,flour:state.flour,share:state.share,sound:state.sound,talk:state.talk,listen:state.listen,heatView:state.heatView,tab:state.tab,eat:state.eat,per:state.per});}
+function save(){LS.set('tabun.settings',{style:state.style,plan:state.plan,fastH:state.fastH,room:state.room,yeast:state.yeast,pref:state.pref,calLead:state.calLead,flour:state.flour,share:state.share,sound:state.sound,talk:state.talk,listen:state.listen,heatView:state.heatView,tab:state.tab,eat:state.eat,per:state.per});}
 
 /* ---------- helpers ---------- */
 const rotTxt=n=>n===1?'סיבוב אחד':n+' סיבובים';
@@ -925,22 +952,42 @@ function hydDelta(){const {f,sh}=fl();return f.hyd*sh/100;}
 function effHyd(){return Math.round(Math.min(85,Math.max(55,state.per[state.style].hyd+hydDelta())));}
 function speed(){const {f,sh}=fl();return 1-(1-f.speed)*sh/100;}
 function coldLimit(){const {f,sh}=fl();if(!f.maxCold)return 99;for(const [thr,h] of f.maxCold)if(sh>=thr)return h;return 99;}
-function recipe(){
+/* sourdough is already a pre-ferment, and a fast dough has no time for one */
+function prefK(){return state.yeast==='sour'||PLANS[state.plan].fast?'direct':state.pref;}
+/* how long the pre-ferment sits: nominal hours, stretched or shortened so it isn't mixed in the middle of the night */
+function prefHours(T){
+  const pf=PREF[prefK()],plan=PLANS[state.plan];
+  if(!T)return pf.hours;
+  const H=3600e3,knead=T-(plan.cold?plan.hours+4:8)*H-(state.flour==='ww'?45*60e3:0);
+  const night=n=>{const h=new Date(knead-n*H).getHours();return h<7||h>=23;};
+  if(!night(pf.hours))return pf.hours;
+  for(let d=1;d<=12;d++)for(const n of [pf.hours+d,pf.hours-d])if(n>=pf.range[0]&&n<=pf.range[1]&&!night(n))return n;
+  return pf.hours;
+}
+function recipe(T){
+  if(T===undefined)T=state.eat;
   const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan];
   const roomF=plan.cold?1:ROOM[state.room].f,sp=speed(),hyd=effHyd(),sour=state.yeast==='sour'&&!plan.fast;
+  const pf=PREF[prefK()],yMul=state.yeast==='dry'?1:3;
   let yPct=0,sPct=0;
   if(sour)sPct=SOUR[state.plan]*roomF*sp;
-  else{const idy=(plan.fast?FAST_IDY[state.fastH]:plan.idy)*roomF*sp;yPct=state.yeast==='dry'?idy:idy*3;}
+  else{const idy=(plan.fast?FAST_IDY[state.fastH]:plan.idy)*roomF*sp;yPct=idy*yMul*(pf.cut||1);}
   const total=p.balls*p.weight*1.02;
   const TF=total*100/(100+hyd+p.salt+yPct+s.oil+s.sugar);
   const starter=TF*sPct/100,flour=TF-starter/2;
   const {sh}=fl(),special=flour*sh/100;
-  return {total,TF,hyd,sour,sPct,starter,flour,base:flour-special,special,water:TF*hyd/100-starter/2,salt:TF*p.salt/100,yeast:TF*yPct/100,oil:TF*s.oil/100,sugar:TF*s.sugar/100};
+  let pre=null;
+  if(pf.share){
+    const pfl=flour*pf.share/100,hours=prefHours(T);
+    pre={k:prefK(),hours,flour:pfl,water:pfl*pf.hyd/100,yeast:pfl*pf.idy*(pf.hours/hours)*ROOM[state.room].f*yMul/100};
+  }
+  return {total,TF,hyd,sour,sPct,starter,flour,base:flour-special,special,water:TF*hyd/100-starter/2,salt:TF*p.salt/100,yeast:TF*yPct/100+(pre?pre.yeast:0),pre,oil:TF*s.oil/100,sugar:TF*s.sugar/100};
 }
 function doughLabel(){
   const {k,f,sh}=fl(),parts=[];
   if(k!=='w00')parts.push(sh+'% '+f.short);
   if(state.yeast==='sour')parts.push('מחמצת');
+  if(prefK()!=='direct')parts.push(PREF[prefK()].name);
   return parts.join(', ');
 }
 const ceil5=n=>Math.max(5,Math.ceil(n/5)*5);
@@ -959,7 +1006,7 @@ function defaultEat(){
   return d.getTime();
 }
 function steps(T){
-  const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan],r=recipe();
+  const s=STYLES[state.style],p=state.per[state.style],plan=PLANS[state.plan],r=recipe(T);
   const H=3600e3,M=60e3,out=[];
   const {k,f,sh}=fl(),sour=r.sour,ww=k==='ww',spelt=k==='spelt'||k==='wspelt';
   const extras=(s.oil?', שמן':'')+(s.sugar?' וסוכר':'');
@@ -967,8 +1014,12 @@ function steps(T){
     :spelt?'לשים 6-7 דקות, קצת פחות מהרגיל בגלל הכוסמין.':'לשים 8-10 דקות עד שהבצק חלק ואלסטי.';
   const cw=plan.cold||state.room==='hot'?' קרים':plan.fast?' פושרים (בערך '+D('35°')+')':'';
   const hold=ww?ceil5(r.water*0.08):0;
+  const pre=r.pre,pf=pre&&PREF[pre.k];
+  const yName=state.yeast==='dry'?'שמרים':'שמרים טריים',fy=pre?r.yeast-pre.yeast:0;
   let mix;
-  if(ww)mix='מוסיפים לקמח המושרה את המלח, '+(sour?'המחמצת':'השמרים')+extras+' ואת '+hold+' ג׳ המים שנשארו, ו'+knead;
+  if(pre&&ww)mix='מוסיפים לקמח המושרה את '+pf.the+' בחתיכות, '+grams(fy)+' ג׳ '+yName+extras+', את המלח ואת '+hold+' ג׳ המים שנשארו, ו'+knead;
+  else if(pre)mix='מפרקים את '+pf.the+' ב-'+grams(r.water-pre.water)+' ג׳ מים'+cw+', מוסיפים את שאר הקמח ו-'+grams(fy)+' ג׳ '+yName+extras+', ובסוף את המלח, ו'+knead;
+  else if(ww)mix='מוסיפים לקמח המושרה את המלח, '+(sour?'המחמצת':'השמרים')+extras+' ואת '+hold+' ג׳ המים שנשארו, ו'+knead;
   else if(sour)mix='ממיסים את המלח במים'+cw+', מערבבים פנימה את המחמצת, מוסיפים את הקמח'+extras+' ו'+knead;
   else mix='ממיסים את המלח במים'+cw+', מוסיפים קמח ושמרים'+extras+' ו'+knead;
   let kneadT;
@@ -988,7 +1039,14 @@ function steps(T){
     out.push({t:kneadT,title:'לשים את הבצק',text:mix+(sour?' מכסים ל-4 שעות.':' מכסים לשעתיים.')});
     out.push({t:T-(sour?5:6)*H,title:'חלוקה לכדורים',text:'מחלקים ל-'+p.balls+' כדורים של '+p.weight+' ג׳, מכסים ומשאירים על השיש. '+(sour?'הם אמורים לגדול בכ-50% ולהיות רכים ואווריריים.':'הם אמורים כמעט להכפיל את הנפח.')});
   }
-  if(ww)out.push({t:kneadT-(aMin+5)*M,title:'משרים את הקמח',text:'מערבבים את כל הקמח עם המים'+(plan.fast&&state.room!=='hot'?' הפושרים':'')+', חוץ מ-'+hold+' ג׳, רק עד שאין קמח יבש. מכסים ל-'+aMin+' דקות: הסובין סופג מים והבצק יהיה רך וקל לעבודה.'});
+  if(ww)out.push({t:kneadT-(aMin+5)*M,title:'משרים את הקמח',text:(pre?'מערבבים את שאר הקמח עם '+grams(r.water-pre.water-hold)+' ג׳ מים':'מערבבים את כל הקמח עם המים'+(plan.fast&&state.room!=='hot'?' הפושרים':'')+', חוץ מ-'+hold+' ג׳,')+' רק עד שאין קמח יבש. מכסים ל-'+aMin+' דקות: הסובין סופג מים והבצק יהיה רך וקל לעבודה.'});
+  if(pre){
+    const base=kneadT-(ww?(aMin+5)*M:0),n=pre.hours;
+    const pfl=grams(pre.flour)+' ג׳ '+(k!=='w00'&&r.base>=pre.flour?'קמח לבן':'קמח'),pw=grams(pre.water)+' ג׳ מים',py=grams(pre.yeast)+' ג׳ '+yName+(state.yeast==='dry'?' ('+tsp(pre.yeast)+')':'');
+    out.push({t:base-n*H,title:pre.k==='biga'?'מכינים ביגה':'מכינים פוליש',text:pre.k==='biga'
+      ?'ממיסים '+py+' ב-'+pw+' קרים, מוסיפים '+pfl+' ומערבבים בידיים רק עד שאין קמח יבש. יוצא בצק גושי ויבש, ככה זה צריך להיות. מכסים ומשאירים '+n+' שעות במקום קריר, בערך '+D('18°')+'.'
+      :'מערבבים '+pfl+', '+pw+' ו-'+py+' עד שאין קמח יבש. מכסים ומשאירים על השיש '+n+' שעות. הוא מוכן כשהוא מלא בועות ומתחיל לשקוע קצת במרכז.'});
+  }
   if(sour){
     const need=r.starter;let ft=kneadT-(ww?45*M:0)-6*H,ratio=2;
     const h=new Date(ft).getHours();
@@ -1019,13 +1077,13 @@ function renderPresets(){
   const p=state.per.napo;
   $$('#presets .pr').forEach(b=>{
     const pr=PRESETS.find(x=>x.id===b.dataset.v);
-    const on=state.style==='napo'&&pr.flour===state.flour&&(pr.flour==='w00'||pr.share===state.share[pr.flour])&&pr.yeast===state.yeast&&pr.plan===state.plan&&(!pr.fastH||pr.fastH===state.fastH)&&Math.round(p.hyd)===pr.hyd;
+    const on=state.style==='napo'&&pr.flour===state.flour&&(pr.flour==='w00'||pr.share===state.share[pr.flour])&&pr.yeast===state.yeast&&pr.plan===state.plan&&(pr.pref||'direct')===prefK()&&(!pr.fastH||pr.fastH===state.fastH)&&Math.round(p.hyd)===pr.hyd;
     b.setAttribute('aria-checked',String(on));
   });
 }
 function applyPreset(pr){
   state.style='napo';state.flour=pr.flour;if(pr.share)state.share[pr.flour]=pr.share;
-  state.yeast=pr.yeast;state.plan=pr.plan;state.per.napo.hyd=pr.hyd;if(pr.fastH)state.fastH=pr.fastH;
+  state.yeast=pr.yeast;state.plan=pr.plan;state.pref=pr.pref||'direct';state.per.napo.hyd=pr.hyd;if(pr.fastH)state.fastH=pr.fastH;
   if(PLANS[pr.plan].fast)state.eat=soonestEat();
   else if(!state.eat||steps(state.eat)[0].t<Date.now())state.eat=defaultEat();
   save();renderStyleCards();renderDough();paint();update();
@@ -1112,6 +1170,14 @@ function renderDough(){
     const sm=document.createElement('small');sm.textContent='ג׳';b.append(num,sm);
     li.append(sw,a,b);ul.appendChild(li);
   }
+  const pb=$('#prebox');pb.hidden=!r.pre;pb.textContent='';
+  if(r.pre){
+    const pf=PREF[r.pre.k],pg=el('div','pg');
+    for(const [n,g] of [['קמח',r.pre.flour],['מים',r.pre.water],[state.yeast==='dry'?'שמרים':'שמרים טריים',r.pre.yeast]]){
+      const sp=el('span',null,n+' ');const num=el('span','num',grams(g));sp.append(num,el('small',null,' ג׳'));pg.appendChild(sp);
+    }
+    pb.append(el('b',null,'מתוך הכמויות, ל'+pf.name+':'),pg,el('p',null,'כל השאר נכנס לבצק עצמו. מתי מכינים מה, בלוח הזמנים למטה.'));
+  }
 
   seg($('#plan'),Object.entries(PLANS).map(([k,v])=>[k,v.name]),state.plan,v=>{
     const wasSour=state.yeast==='sour';
@@ -1128,7 +1194,18 @@ function renderDough(){
   const lim=coldLimit(),pw=$('#plan-w');
   if(plan.cold&&plan.hours>lim){pw.hidden=false;pw.textContent='עם '+sh+'% '+ff.short+' עדיף עד '+lim+' שעות במקרר. '+(fk==='ww'?'קמח מלא תוסס מהר והבצק נחלש בתסיסה ארוכה מדי.':'הגלוטן של כוסמין נחלש בתסיסה ארוכה, והבצק יקרע בפתיחה.');}
   else pw.hidden=true;
-  $('#roomwrap').hidden=plan.cold;
+  const prefOk=!plan.fast&&state.yeast!=='sour';
+  $('#prefwrap').hidden=!prefOk;
+  if(prefOk){
+    seg($('#pref'),Object.entries(PREF).map(([k,v])=>[k,v.name]),state.pref,v=>{
+      state.pref=v;
+      if(!state.eat||steps(state.eat)[0].t<Date.now())state.eat=defaultEat();
+      save();renderDough();
+    });
+    $('#pref-d').textContent=PREF[state.pref].desc;
+  }
+  // the pre-ferment sits on the counter, so room temperature matters even for a cold plan
+  $('#roomwrap').hidden=plan.cold&&prefK()==='direct';
   seg($('#room'),Object.entries(ROOM).map(([k,v])=>[k,v.name]),state.room,v=>{state.room=v;save();renderDough();});
   $('#room-d').textContent=ROOM[state.room].desc;
   renderWhen();
@@ -1201,7 +1278,68 @@ $('#warn-fix').addEventListener('click',()=>{
   if(fh){state.plan='fast';state.fastH=fh;if(state.yeast==='sour')state.yeast='dry';save();renderDough();toast('עברנו לבצק מהיר של '+fh+' שעות');return;}
   state.eat=defaultEat();save();renderWhen();toast('נקבע לזמן הקרוב שאפשר');
 });
-$('#copy').addEventListener('click',async()=>{
+/* ---------- calendar ---------- */
+const CAL_DUR=15*60e3;
+const CAL_LEADS=[[0,'בזמן השלב'],[10,'10 דק׳ לפני'],[30,'חצי שעה לפני']];
+const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const icsEsc=s=>String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n');
+const icsT=t=>new Date(t).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+// RFC 5545: lines of at most 75 octets, continued with a leading space, never splitting a character
+function icsFold(line){
+  const enc=new TextEncoder(),parts=[];let cur='',n=0;
+  for(const ch of line){const b=enc.encode(ch).length;if(n+b>75){parts.push(cur);cur=' ';n=1;}cur+=ch;n+=b;}
+  parts.push(cur);return parts.join('\r\n');
+}
+function calSteps(){const now=Date.now();return steps(state.eat).map((s,i)=>Object.assign({i},s)).filter(s=>s.t>=now);}
+// calendars don't need the bidi isolates D() wraps around numbers
+function calDetails(s,first){return (s.text+(first?'\n\n'+recipeLines().join('\n'):'')).replace(/[⁦-⁩]/g,'');}
+function buildICS(list){
+  const lead=state.calLead,stamp=icsT(Date.now());
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//OoniTabooni//Tabun//HE','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  list.forEach((s,j)=>L.push('BEGIN:VEVENT','UID:tabun-'+state.eat+'-'+s.i+'@ooni-tabooni','DTSTAMP:'+stamp,'DTSTART:'+icsT(s.t),'DTEND:'+icsT(s.t+CAL_DUR),
+    'SUMMARY:'+icsEsc('🍕 '+s.title),'DESCRIPTION:'+icsEsc(calDetails(s,j===0)),
+    'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(s.title),'TRIGGER:'+(lead?'-PT'+lead+'M':'PT0S'),'END:VALARM','END:VEVENT'));
+  L.push('END:VCALENDAR');
+  return L.map(icsFold).join('\r\n')+'\r\n';
+}
+function saveICS(list){
+  const ics=buildICS(list);
+  // iOS opens a calendar data URL straight in the "Add to Calendar" sheet
+  if(isIOS){location.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);return;}
+  const url=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');
+  a.href=url;a.download='tabun-'+icsT(state.eat).slice(0,8)+'.ics';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60e3);
+}
+function gcalURL(s,first){
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('🍕 '+s.title)+'&dates='+icsT(s.t)+'/'+icsT(s.t+CAL_DUR)+'&details='+encodeURIComponent(calDetails(s,first));
+}
+function openCalSheet(){
+  if(!state.eat)state.eat=defaultEat();
+  const list=calSteps();
+  if(!list.length){toast('אין שלבים עתידיים להוספה');return;}
+  const box=modal('תזכורות ללוח השנה');
+  const a=new Date(list[0].t),b=new Date(list[list.length-1].t);
+  box.appendChild(el('p','calnote',(list.length===1?'שלב אחד':list.length+' שלבים')+', מ'+dayLabel(a)+' ב-'+hhmm(a)+' עד '+dayLabel(b)+' ב-'+hhmm(b)+'. כל שלב נכנס כאירוע עם התראה. שינית את התוכנית? מוסיפים שוב.'));
+  box.appendChild(el('div','calsub','מתי להזכיר'));
+  const lead=el('div');lead.setAttribute('role','radiogroup');lead.setAttribute('aria-label','מתי להזכיר');box.appendChild(lead);
+  const pickLead=v=>{state.calLead=v;save();seg(lead,CAL_LEADS,v,pickLead);};
+  seg(lead,CAL_LEADS,state.calLead,pickLead);
+  const go=el('button','btn','הוספה ללוח השנה');go.type='button';
+  go.addEventListener('click',()=>{saveICS(list);if(!isIOS)toast('קובץ היומן ירד. פותחים אותו כדי להוסיף');});
+  box.append(go,el('p','desc','עובד עם יומן ה-iPhone וה-Mac, עם Outlook ועם כל יומן שפותח קובצי ics.'));
+  box.appendChild(el('div','calsub','או שלב אחר שלב ב-Google Calendar'));
+  const card=el('div','card shopcard'),ul=el('ul','shop');
+  list.forEach((s,j)=>{
+    const d=new Date(s.t),li=el('li'),nm=el('div','nm');
+    nm.append(el('b',null,s.title),el('small',null,dayLabel(d)+' ב-'+hhmm(d)));
+    const amt=el('div','amt'),lk=el('a','ghostbtn','הוספה');lk.href=gcalURL(s,j===0);lk.target='_blank';lk.rel='noopener';
+    amt.appendChild(lk);li.append(nm,amt);ul.appendChild(li);
+  });
+  card.appendChild(ul);box.append(card,el('p','desc','ב-Google ההתראה נקבעת לפי ברירת המחדל של היומן שלך.'));
+}
+$('#cal').addEventListener('click',openCalSheet);
+
+function recipeLines(){
   const s=STYLES[state.style],p=state.per[state.style],r=recipe(),plan=PLANS[state.plan];
   const {k:fk,f:ff}=fl(),dl=doughLabel();
   const lines=[s.name+(dl?' ('+dl+')':'')+': '+p.balls+' × '+p.weight+' ג׳, הידרציה '+r.hyd+'%'];
@@ -1210,7 +1348,12 @@ $('#copy').addEventListener('click',async()=>{
   lines.push('מים: '+grams(r.water)+' ג׳','מלח: '+grams(r.salt)+' ג׳');
   lines.push(r.sour?'מחמצת פעילה (100%): '+grams(r.starter)+' ג׳':(state.yeast==='dry'?'שמרים יבשים: ':'שמרים טריים: ')+grams(r.yeast)+' ג׳');
   if(s.oil)lines.push('שמן זית: '+grams(r.oil)+' ג׳');if(s.sugar)lines.push('סוכר: '+grams(r.sugar)+' ג׳');
+  if(r.pre)lines.push('מתוך זה ל'+PREF[r.pre.k].name+': '+grams(r.pre.flour)+' ג׳ קמח, '+grams(r.pre.water)+' ג׳ מים, '+grams(r.pre.yeast)+' ג׳ שמרים');
   lines.push('תסיסה: '+(plan.fast?'בצק מהיר, '+state.fastH+' שעות':plan.cold?plan.hours+' שעות במקרר':'באותו יום'));
+  return lines;
+}
+$('#copy').addEventListener('click',async()=>{
+  const lines=recipeLines();
   const st=steps(state.eat||defaultEat());
   lines.push('','שלבים:');
   for(const x of st){const d=new Date(x.t);lines.push(dayLabel(d)+' '+hhmm(d)+': '+x.title);}
